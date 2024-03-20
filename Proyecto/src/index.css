@@ -1,11 +1,11 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: rgb(4, 3, 65);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,14 +26,10 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 250px;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 
 button {
   border-radius: 8px;
@@ -54,15 +50,42 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.mainbar{
+  border-style: solid;
+  height: 100px;
+  width: 390px;
+  margin-left: -15px;
+  margin-top: -335px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  background-color: rgb(10, 9, 117);
+
+}
+
+.search{
+  margin-top: 20px;
+  margin-left: -75px;
+  width: 73vw;
+  height: 30px;
+}
+.options {
+  width: 390px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.user{
+  width: 55px;
+  height: 55px;
+  margin-top: 7px;
+  margin-left: 310px;
+  position: absolute;
+  border-radius: 30px;
+}
+h1{
+  font-size:15px;
+  color: rgb(207, 6, 191);
 }
