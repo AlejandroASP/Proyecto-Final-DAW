@@ -55,13 +55,12 @@ button:focus-visible {
   height: 100px;
   width: 390px;
   margin-left: -15px;
-  margin-top: -335px;
+  margin-top: -420px;
   display: flex;
   flex-wrap: wrap;
   align-content: space-around;
   justify-content: center;
   background-color: rgb(10, 9, 117);
-
 }
 
 .search{
@@ -88,4 +87,12 @@ button:focus-visible {
 h1{
   font-size:15px;
   color: rgb(207, 6, 191);
+}
+
+.content{
+  margin-top: 5px;
+  min-height: 50px; /* Cambiado de 'height' a 'min-height' */
+  width: 395px;
+  margin-left: -15px;
+  background-color: rgb(10, 9, 117);
 }

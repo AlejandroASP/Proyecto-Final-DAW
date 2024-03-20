@@ -10,13 +10,15 @@ export function App() {
     // Las <> Son el inicializador
     <>
       <div class="mainbar">
-        <input type="search" class="search"/>
-        <img src="https://unavatar.io/kikobeats" alt="imagen usuario" class="user"/>
+        <input type="search" class="search" />
+        <img src="https://unavatar.io/kikobeats" alt="imagen usuario" class="user" />
         <div class="options">
           <h1>Menu</h1>
           <h1>WishList</h1>
           <h1>Wallet</h1>
         </div>
+      </div>
+      <div className="content">
       </div>
     </>
   )
