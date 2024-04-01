@@ -1,18 +1,18 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: rgb(4, 3, 65);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+#root{
+  padding:0;
+  margin-left: 25px;
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -47,7 +47,6 @@ body {
 
 .search {
   margin-top: 20px;
-  margin-left: -65px;
   width: 73vw;
   height: 30px;
 }
@@ -130,4 +129,8 @@ h1>a {
 }
 .product:hover{
   opacity: 0.5;
+}
+
+.rs-drawer-wrapper {
+  z-index: 10000; /* Ajusta el z-index según sea necesario para que el Drawer se muestre correctamente */
 }
