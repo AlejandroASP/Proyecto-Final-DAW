@@ -7,8 +7,6 @@ function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí iría tu lógica de registro
-
     // Después de registrar al usuario, redirige a la página de inicio de sesión
     navigate('/login');
   };

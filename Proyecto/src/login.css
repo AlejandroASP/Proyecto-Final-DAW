@@ -1,5 +1,4 @@
 .content-login {
-
     min-height: 50px;
     width: 395px;
     margin-left: -15px;
@@ -7,4 +6,4 @@
     display: flex;
     flex-direction: column; /* Cambiado de 'row' a 'column' */
     justify-content: space-around;
-  }
+}

@@ -8,6 +8,9 @@ import Register from './register';
 
 export function App() {
   return (
+    //Router es el padre que va a gestionar los redireccionamientos
+    //Se ha puesto para no tener contenido html en esta parte y 
+    //tener las vistas más limpias
     <Router>
         <Routes>
           <Route path='/login' element={<Login />} />

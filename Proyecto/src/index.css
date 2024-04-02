@@ -1,6 +1,5 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: rgb(4, 3, 65);
@@ -24,32 +23,12 @@ a:hover {
 }
 
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 250px;
+  flex-direction: column;
   min-height: 100vh;
 }
 
-.mainbar {
-  position: relative;
-  border-style: solid;
-  height: 100px;
-  width: 390px;
-  margin-left: -15px;
-  margin-top: -420px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-around;
-  justify-content: center;
-  background-color: rgb(10, 9, 117);
-}
 
-.search {
-  margin-top: 20px;
-  width: 73vw;
-  height: 30px;
-}
 .dropdown {
   display: flex;
   flex-direction: column;
@@ -63,23 +42,7 @@ body {
 }
 
 
-.options {
-  width: 390px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-h1 {
-  font-size: 15px;
-}
 
-h1>a {
-  color: rgb(207, 6, 191);
-}
-.options > h1 > a:hover{
-  color: orange;
-}
 
 .user {
   width: 55px;
@@ -90,24 +53,27 @@ h1>a {
   border-radius: 30px;
 }
 
+/*Caja que contiene los productos*/
 .content {
-  position: absolute;
   margin-top: 10px;
-  min-height: 50px;
+  min-height: auto;
   width: 395px;
   margin-left: -15px;
   background-color: rgb(10, 9, 117);
   display: flex;
-  flex-direction: column; /* Cambiado de 'row' a 'column' */
+  flex-direction: column;
   justify-content: space-around;
+  flex: 1 0 auto;
 }
 
+/* Separador de los productos */
 .product-pair {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
+/* Caja del producto */
 .product {
   box-shadow: 2px 2px 10px black;
   width: 150px;
@@ -118,19 +84,19 @@ h1>a {
   transition: opacity 0.3s ease-in-out;
 }
 
+/* Imagen del producto */
 .product > img {
   width: 150px;
   height: 150px;
   margin: auto;
 }
 
+/* Parrafo del producto */
 .product > p{
   margin: auto;
 }
+
+/* Hover a la caja del producto */
 .product:hover{
   opacity: 0.5;
-}
-
-.rs-drawer-wrapper {
-  z-index: 10000; /* Ajusta el z-index según sea necesario para que el Drawer se muestre correctamente */
 }

@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './header';
-
+import Footer from './footer';
 function Index() {
 
     return (
@@ -55,7 +55,33 @@ function Index() {
                         <p>Precio</p>
                     </div>
                 </div>
+                <div className="product-pair">
+                    <div className="product">
+                        <img src="https://unavatar.io/kikobeats" alt="imagen producto" />
+                        <p>Producto2</p>
+                        <p>Precio</p>
+                    </div>
+                    <div className="product">
+                        <img src="https://unavatar.io/kikobeats" alt="imagen producto" />
+                        <p>Producto2</p>
+                        <p>Precio</p>
+                    </div>
+                </div>
+                <div className="product-pair">
+                    <div className="product">
+                        <img src="https://unavatar.io/kikobeats" alt="imagen producto" />
+                        <p>Producto2</p>
+                        <p>Precio</p>
+                    </div>
+                    <div className="product">
+                        <img src="https://unavatar.io/kikobeats" alt="imagen producto" />
+                        <p>Producto2</p>
+                        <p>Precio</p>
+                    </div>
+                </div>
+                
             </div>
+            <Footer />
         </>
     );
 }

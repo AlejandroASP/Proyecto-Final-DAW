@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './menu.css'; // Estilos CSS personalizados para el menú
+
 
 function Menu() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,8 +1,9 @@
 # React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este proyecto ha sido realizado por las siguientes personas
+Alejandro Serafin Paredes
+Guillermo Hernández Espí
+César Eladio Cabello
+-------------------------------------------
+El proyecto trata sobre una página web estilo Steam, la cuál podrá mostrar productos
+de una base de datos con imagenes, precio, etc...
+Se podrá comprar.
