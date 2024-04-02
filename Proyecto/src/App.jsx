@@ -1,7 +1,7 @@
-import './App.css';
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Login from './login';
+import Login from './templates/Login/login';
 import Index from './index';
 import Register from './register';
 

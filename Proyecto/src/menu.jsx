@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 function Menu() {
   const [isOpen, setIsOpen] = useState(false);
 

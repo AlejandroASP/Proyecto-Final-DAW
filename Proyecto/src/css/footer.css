@@ -1,10 +1,16 @@
 /* Contenedor del footer */
 footer {
-    width: 427px;
-    height: 300px;
     display: flex;
     background-color: #123dca;
-    flex-direction: column;
-    margin-left: -35px;
+    width: 395px;
     margin-top: 20px;
+    margin-left: -15px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.footer-section {
+    width: 30%;
+    color: white;
 }

@@ -12,33 +12,35 @@ function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Nombre:
-        <input type="text" name="firstName" />
-      </label>
-      <label>
-        Apellidos:
-        <input type="text" name="lastName" />
-      </label>
-      <label>
-        Correo electrónico:
-        <input type="email" name="email" />
-      </label>
-      <label>
-        Confirmar correo electrónico:
-        <input type="email" name="confirmEmail" />
-      </label>
-      <label>
-        Contraseña:
-        <input type="password" name="password" />
-      </label>
-      <label>
-        Confirmar contraseña:
-        <input type="password" name="confirmPassword" />
-      </label>
-      <input type="submit" value="Registrarse" />
-    </form>
+    <div className="content-register">
+      <form onSubmit={handleSubmit}>
+        <label>
+          Nombre
+          <input type="text" name="firstName" />
+        </label>
+        <label>
+          Apellidos
+          <input type="text" name="lastName" />
+        </label>
+        <label>
+          Correo electrónico
+          <input type="email" name="email" />
+        </label>
+        <label>
+          Confirmar correo electrónico
+          <input type="email" name="confirmEmail" />
+        </label>
+        <label>
+          Contraseña
+          <input type="password" name="password" />
+        </label>
+        <label>
+          Confirmar contraseña
+          <input type="password" name="confirmPassword" />
+        </label>
+        <input className='register' type="submit" value="Registrarse" />
+      </form>
+    </div>
   );
 }
 
