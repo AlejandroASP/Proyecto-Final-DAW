@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
 
   const handleSubmit = (event) => {
+    console.log('handleSubmit called');
     event.preventDefault();
 
     // Recoge la información del formulario
-    const username = event.target.elements.username.value;
     const firstName = event.target.elements.firstName.value;
     const lastName = event.target.elements.lastName.value;
     const email = event.target.elements.email.value;
@@ -19,20 +18,18 @@ function Register() {
 
     // Verifica si los correos electrónicos y las contraseñas coinciden
     if (email !== confirmEmail) {
-      setError('Los correos electrónicos no coinciden');
+      alert('Los correos electrónicos no coinciden');
       return;
     }
 
     if (password !== confirmPassword) {
-      setError('Las contraseñas no coinciden');
+      alert('Las contraseñas no coinciden');
       return;
     }
 
     // Crea el objeto usuario
     const user = {
-      username,
-      firstName,
-      lastName,
+      username: firstName + ' ' + lastName, // Esto asume que 'usuario' es el nombre completo
       email,
       password
     };
@@ -52,7 +49,7 @@ function Register() {
           navigate('/login');
         } else {
           // Si hay un error, muestra el mensaje de error
-          setError(data.message);
+          alert(data.message);
         }
       })
       .catch((error) => {
@@ -60,37 +57,41 @@ function Register() {
       });
   };
 
+
   return (
     <div className="content-register">
-      {error && <div onClick={() => setError(null)}>{error}</div>}
       <form onSubmit={handleSubmit}>
         <label>
-          Nombre de usuario
-          <input type="text" name="username" required />
-        </label>
-        <label>
           Nombre
-          <input type="text" name="firstName" required />
+          <input type="text" name="firstName" />
         </label>
         <label>
           Apellidos
-          <input type="text" name="lastName" required />
+          <input type="text" name="lastName" />
         </label>
         <label>
           Correo electrónico
-          <input type="email" name="email" required />
+          <input type="email" name="email" />
         </label>
         <label>
           Confirmar correo electrónico
-          <input type="email" name="confirmEmail" required />
+          <input type="email" name="confirmEmail" />
         </label>
         <label>
           Contraseña
-          <input type="password" name="password" required />
+          <input type="password" name="password" />
         </label>
         <label>
           Confirmar contraseña
-          <input type="password" name="confirmPassword" required />
+          <input type="password" name="confirmPassword" />
+        </label>
+        <label>
+          Confirmar contraseña
+          <input type="password" name="confirmPassword" />
+        </label>
+        <label>
+          Confirmar contraseña
+          <input type="password" name="confirmPassword" />
         </label>
         <input className='register' type="submit" value="Registrarse" />
       </form>
