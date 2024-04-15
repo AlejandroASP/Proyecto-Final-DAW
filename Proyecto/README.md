@@ -4,6 +4,7 @@ Este proyecto ha sido realizado por las siguientes personas
 - Guillermo Hernández Espí.
 - César Eladio Cabello.
 -------------------------------------------
+# Descripción breve del proyecto
 El proyecto trata sobre una página web estilo Steam, la cuál podrá mostrar productos,
 de una base de datos con imagenes, precio, etc...
 -------------------------------------------
