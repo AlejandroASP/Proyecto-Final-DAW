@@ -7,7 +7,7 @@ Este proyecto ha sido realizado por las siguientes personas
 El proyecto trata sobre una página web estilo Steam, la cuál podrá mostrar productos,
 de una base de datos con imagenes, precio, etc...
 -------------------------------------------
-#App.js
+# App.js
 - Encargado de la conexión a la base de datos
 - Gestión de login.
 - Gestión de registro.
