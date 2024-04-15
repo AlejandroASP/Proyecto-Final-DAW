@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Header from './templates/header';
+import Footer from './templates/footer';
 
 function Register() {
   const navigate = useNavigate();
@@ -61,40 +64,47 @@ function Register() {
   };
 
   return (
-    <div className="content-register">
-      {error && <div onClick={() => setError(null)}>{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Nombre de usuario
-          <input type="text" name="username" required />
-        </label>
-        <label>
-          Nombre
-          <input type="text" name="firstName" required />
-        </label>
-        <label>
-          Apellidos
-          <input type="text" name="lastName" required />
-        </label>
-        <label>
-          Correo electrónico
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Confirmar correo electrónico
-          <input type="email" name="confirmEmail" required />
-        </label>
-        <label>
-          Contraseña
-          <input type="password" name="password" required />
-        </label>
-        <label>
-          Confirmar contraseña
-          <input type="password" name="confirmPassword" required />
-        </label>
-        <input className='register' type="submit" value="Registrarse" />
-      </form>
-    </div>
+    <>
+      <Header />
+      <div className="content-register">
+        {error && <div onClick={() => setError(null)}>{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <label>
+            Nombre de usuario
+            <input type="text" name="username" required />
+          </label>
+          <label>
+            Nombre
+            <input type="text" name="firstName" required />
+          </label>
+          <label>
+            Apellidos
+            <input type="text" name="lastName" required />
+          </label>
+          <label>
+            Correo electrónico
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            Confirmar correo electrónico
+            <input type="email" name="confirmEmail" required />
+          </label>
+          <label>
+            Contraseña
+            <input type="password" name="password" required />
+          </label>
+          <label>
+            Confirmar contraseña
+            <input type="password" name="confirmPassword" required />
+          </label>
+          <input className='register' type="submit" value="Registrarse" />
+        </form>
+        <div>
+          <p>¿Ya tienes una cuenta? <Link to="/login">Inicia sesion</Link></p>
+        </div>
+      </div>
+      <Footer/>
+    </>
   );
 }
 

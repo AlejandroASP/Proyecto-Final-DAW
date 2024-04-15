@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from './templates/Login/login';
 import Index from './index';
 import Register from './register';
+import EditUser from './templates/User/edit';
 
 
 export function App() {
@@ -16,6 +17,7 @@ export function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/' element={<Index />} />
           <Route path='/register' element={<Register/>} />
+          <Route path='/edit' element={<EditUser/>}/>
         </Routes>
     </Router>
   )

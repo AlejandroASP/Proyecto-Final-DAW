@@ -35,7 +35,7 @@ function Header() {
                 <div className="options">
                     <h1><Link to="/login">Inicio de Sesion</Link></h1>
                     <h1><Link to="/register">Registro</Link></h1>
-                    <h1><Link to="/register">Registro</Link></h1>
+                    <h1><Link to="/edit">Editar Perfil</Link></h1>
                     <h1><Link to="/register">Registro</Link></h1>
                     <h1><Link to="/register">Registro</Link></h1>
                 </div>

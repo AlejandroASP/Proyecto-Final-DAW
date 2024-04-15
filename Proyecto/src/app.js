@@ -5,9 +5,13 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bcrypt from 'bcrypt';
+import multer from 'multer';
+import session from 'express-session';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const upload = multer({ dest: 'uploads/' });
 
 const app = express();
 
@@ -31,6 +35,58 @@ db.connect((err) => {
 // Sirve los archivos estáticos de tu aplicación React
 app.use(express.static(path.join(__dirname, '/dist')));
 
+app.use(session({
+    secret: 'PapasConMojo',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // establece esto en true si estás en https
+}));
+
+
+app.put('/update-profile', upload.single('img'), async (req, res) => {
+    const { usuario, contraseñaActual, contraseñaNueva } = req.body;
+    const img = req.file;
+    const userId = req.session.userId;
+    // Primero, obtenemos el usuario de la base de datos
+    db.query('SELECT * FROM User WHERE id = ?', [req.userId], async (error, results) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ message: 'Error al buscar el usuario' });
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).send({ message: 'Usuario no encontrado' });
+            return;
+        }
+
+        const user = results[0];
+
+        // Comprobamos si la contraseña actual es correcta
+        const match = await bcrypt.compare(contraseñaActual, user.contraseña);
+
+        if (!match) {
+            res.status(401).send({ message: 'Contraseña incorrecta' });
+            return;
+        }
+
+        // Si la contraseña es correcta, actualizamos la contraseña y el nombre del usuario
+        const hashedPassword = await bcrypt.hash(contraseñaNueva, 10);
+
+        const imgPath = img ? path.join(img.destination, img.filename) : user.img;
+
+        db.query('UPDATE User SET usuario = ?, contraseña = ?, img = ? WHERE id = ?', [usuario, hashedPassword, imgPath, req.userId], (error, results) => {
+            if (error) {
+                console.log(error);
+                res.status(500).send({ message: 'Error al actualizar el perfil' });
+                return;
+            }
+
+            res.send({ message: 'Perfil actualizado con éxito' });
+        });
+    });
+});
+
 // Cuando accedas a cualquier ruta, tu servidor Express servirá tu aplicación React
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/dist', 'index.html'));
@@ -51,6 +107,7 @@ app.post('/login', (req, res) => {
                 if (err) {
                     res.json({ success: false, message: err.message });
                 } else if (isMatch) {
+                    req.session.userId = user.id; // guarda el ID de usuario en la sesión
                     res.json({ success: true });
                 } else {
                     res.json({ success: false, message: 'Contraseña incorrecta' });
@@ -61,6 +118,7 @@ app.post('/login', (req, res) => {
         }
     });
 });
+
 
 app.post('/register', (req, res) => {
     const { username, firstName, lastName, email, password } = req.body;
@@ -93,6 +151,27 @@ app.post('/register', (req, res) => {
     });
 });
 
+app.get('/get-user', (req, res) => {
+    const userId = req.session.userId;
+
+    db.query('SELECT * FROM User WHERE id = ?', [userId], (error, results) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send({ message: 'Error al buscar el usuario' });
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).send({ message: 'Usuario no encontrado' });
+            return;
+        }
+
+        const user = results[0];
+
+        // Devuelve los detalles del usuario al cliente
+        res.json({ usuario: user.usuario, img: user.img });
+    });
+});
 
 
 app.listen(5173, () => console.log('El servidor está corriendo en el puerto 5173'));
