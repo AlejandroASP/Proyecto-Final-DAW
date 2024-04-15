@@ -8,8 +8,6 @@ El proyecto trata sobre una página web estilo Steam, la cuál podrá mostrar pr
 de una base de datos con imagenes, precio, etc...
 Se podrá comprar.
 -------------------------------------------
-
--------------------------------------------
 -----------------App.js--------------------
 Encargado de la conexión a la base de datos
 Gestión de login.
