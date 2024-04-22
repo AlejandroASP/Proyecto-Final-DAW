@@ -1,14 +1,16 @@
-# Rincón Canino
+# Vortex
 
-El proyecto Rincón Canino es una aplicación web que permite a los usuarios reservar clases y estancias para sus mascotas. 
+El proyecto Vortex es una aplicación web que permite a los usuarios comprar juegos. 
 
-La administradora de la aplicación podrá gestionar las clases, los usuarios y las mascotas. Por otro lado, los usuarios podrán reservar clases y estancias para sus mascotas, además de poder ver las fotos de sus mascotas.
+Los usuarios podrán registrarse, comprar y editar su perfil.
 
 ## Instalación
 
-Para instalar el proyecto será necesario tener instalado [Node.js](https://nodejs.org/) y [npm](https://www.npmjs.com/).
+Para instalar el proyecto será necesario tener instalado
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/).
 
-Primero, se deberá clonar el repositorio en la carpeta deseada. Una vez clonado, se deberá instalar las dependencias del proyecto con el siguiente comando: 
+Primero, se deberá clonar el repositorio en la carpeta deseada. Una vez clonado, instalar las dependencias del proyecto con el siguiente comando: 
 
 ```bash
 npm install
