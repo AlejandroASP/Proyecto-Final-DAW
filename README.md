@@ -52,17 +52,16 @@ const sequelize = new Sequelize('nombre_schema', 'nombre_usuario', process.env.M
 });
 ```
 
-Para poder hacer uso de la base de datos será necesario tener instalado [MySQL](https://www.mysql.com/). Una vez instalado, se deberá importar los archivos necesarios para la creación de la base de datos. 
+Para poder hacer uso de la base de datos será necesario tener instalado
+- [MySQL](https://www.mysql.com/).
+Una vez instalado, se deberá importar los archivos necesarios para la creación de la base de datos. 
 
-Además se tendrá que añadir un usuario en la base de datos con el siguiente comando:
+Ya hay un usuario en la base de datos para poder acceder:
 
-```sql
-CREATE USER 'nombre_usuario'@'%' IDENTIFIED BY 'contraseña';
-GRANT ALL PRIVILEGES ON *.* TO 'nombre_usuario'@'%';
-FLUSH PRIVILEGES;
+```Usuario
+Usuario: Vortex_Admin
+Contraseña: Vortex_7788
 ```
-
-Esto hará que se pueda acceder a la base de datos desde cualquier dirección IP.
 
 ## Estructura del proyecto
 
@@ -70,7 +69,9 @@ El proyecto está dividido en dos partes fundamentales: Frontend y Backend.
 
 ### Frontend
 
-La parte de frontend del proyecto está desarrollada con [React](https://es.reactjs.org/). La estructura de la carpeta es la siguiente:
+La parte de frontend del proyecto está desarrollada con
+- [React](https://es.reactjs.org/).
+La estructura de la carpeta es la siguiente:
 
 ```bash
 Frontend
@@ -91,7 +92,9 @@ Frontend
 
 ### Backend
 
-La parte de backend del proyecto está desarrollada con [Node.js](https://nodejs.org/) y [Express](https://expressjs.com/). La estructura de la carpeta es la siguiente:
+La parte de backend del proyecto está desarrollada con
+- [Node.js](https://nodejs.org/)
+La estructura de la carpeta es la siguiente:
 
 ```bash
 Backend
@@ -109,7 +112,6 @@ Backend
 
 - [React](https://es.reactjs.org/)
 - [Node.js](https://nodejs.org/)
-- [Express](https://expressjs.com/)
 - [MySQL](https://www.mysql.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Heroicons](https://heroicons.com/)
@@ -128,22 +130,21 @@ Backend
 
 ## Frontend
 
-En la aplicación se podrán diferenciar dos tipos de usuarios: administradora y usuarios normales. Los administradores tendrán acceso a una serie de funcionalidades que los usuarios normales no tendrán.
+En la aplicación se podrán diferenciar dos tipos de usuarios: administradora y usuarios normales.
+Los administradores tendrán acceso a una serie de funcionalidades que los usuarios normales no tendrán.
 
 ### Administradora
 
 - Deshabilitar usuarios.
 - Habilitar usuarios.
 - Crear y eliminar clases.
-- Añadir imágenes asociadas a las mascotas.
 
 ### Usuarios normales
 
-- Ver las clases disponibles.
-- Registrar a su mascota.
-- Reservar una clase y/o estancias.
-- Ver las clases y estancias reservadas.
-- Ver las fotos de su mascota.
+- Ver los productos disponibles.
+- Registrarse.
+- Añadir productos al carrito.
+- Editar su perfil.
 
 Por otro lado, ambos tipos de usuarios podrán ver la información sobre los futuros eventos relacionados con el propio usuario.
 
