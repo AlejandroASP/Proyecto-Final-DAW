@@ -43,6 +43,7 @@ app.use(session({
 }));
 
 
+// Funcionalidad para editar el perfil de usuario
 app.put('/update-profile', upload.single('img'), async (req, res) => {
     const { usuario, contraseñaActual, contraseñaNueva } = req.body;
     const img = req.file;
@@ -119,7 +120,7 @@ app.post('/login', (req, res) => {
     });
 });
 
-
+// Funcionalidad de registro del usuario en la base de datos
 app.post('/register', (req, res) => {
     const { username, firstName, lastName, email, password } = req.body;
 
