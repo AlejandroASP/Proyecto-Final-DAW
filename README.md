@@ -45,10 +45,11 @@ MYSQL_PASSWORD=CambiarPorContraseña
 Además, en el fichero /Backend/server/db.js se deberá cambiar el usuario y la contraseña de la base de datos por los que se tengan en el sistema.
 
 ```javascript
-const sequelize = new Sequelize('nombre_schema', 'nombre_usuario', process.env.MYSQL_PASSWORD, {
+const db = mysql.createConnection({
   host: 'localhost',
-  port: 3306,
-  dialect: 'mysql',
+  user: 'user',
+  password: 'passw',
+  database: 'vortexdb'
 });
 ```
 
@@ -115,14 +116,14 @@ Backend
 - [MySQL](https://www.mysql.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Heroicons](https://heroicons.com/)
-- [Sequelize](https://sequelize.org/)
+- [XAMPP](https://www.apachefriends.org/)
 - [React Suite](https://rsuitejs.com/)
 - [Vite](https://vitejs.dev/)
 
 ### Recomendados
 
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [MySQL Workbench](https://www.mysql.com/products/workbench/)
+- [phpMyAdmin](https://www.phpmyadmin.net/)
 - [Postman](https://www.postman.com/)
 - [Git](https://git-scm.com/)
 - [Prettier](https://prettier.io/)
@@ -141,12 +142,12 @@ Los administradores tendrán acceso a una serie de funcionalidades que los usuar
 
 ### Usuarios normales
 
-- Ver los productos disponibles.
+- Ver los juegos disponibles.
 - Registrarse.
 - Añadir productos al carrito.
 - Editar su perfil.
 
-Por otro lado, ambos tipos de usuarios podrán ver la información sobre los futuros eventos relacionados con el propio usuario.
+Por otro lado, ambos tipos de usuarios podrán ver la información que tienen los juegos.
 
 ### Páginas
 
@@ -154,25 +155,21 @@ Por otro lado, ambos tipos de usuarios podrán ver la información sobre los fut
 - Inicio de sesión.
 - Registro de usuario.
 - Fotos de la mascota.
-- Calendario. --> Fuente: https://jquense.github.io/react-big-calendar/examples/?path=/story/about-big-calendar--page
 - Página no encontrada.
-
->> Las páginas de contacto están creadas sin embargo están sin uso ya que la clienta no las requiere de momento.
 
 ## Backend
 
-El backend del proyecto está desarrollado con Node.js y Express. Se ha utilizado Sequelize como ORM para la base de datos MySQL. 
+El backend del proyecto está desarrollado con Node.js. Se ha utilizado XAMPP como ORM para la base de datos MySQL. 
 
 ### Base de datos
 
 La base de datos está compuesta por las siguientes tablas:
 
-- cliente
-- mascota
-- clase
-- estancia
-- admin
-- fotos
+- cart
+- cart_game
+- game
+- genre
+- user
 
 La estructura de cada tabla se puede observar en los ficheros del directorio /Backend/models.
 
