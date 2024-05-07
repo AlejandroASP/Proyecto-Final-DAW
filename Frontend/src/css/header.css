@@ -1,0 +1,63 @@
+/* Contenedor de la lupa
+.magnifier_box {
+    height: 25px;
+    width: 30px;
+    margin-top: 20px;
+}
+/* Lupa */
+/* .magnifier {
+    height: 30px;
+} */
+/* Contenedor Header */
+/* .mainbar {
+    position: relative;
+    border-style: solid;
+    height: 100px;
+    width: 390px;
+    margin-left: -15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+    background-color: rgb(10, 9, 117);
+} */
+
+/* Input de búsqueda */
+/* .search {
+    margin-top: 20px;
+    width: 73vw;
+    height: 30px;
+} */
+
+/* Contenedor de opciones */
+/* .options {
+    width: 390px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+h1 {
+    font-size: 15px;
+}
+
+h1>a {
+    color: rgb(207, 6, 191);
+}
+
+.options>h1>a:hover {
+    color: orange;
+} */
+/**/
+/* .menu {
+    position: absolute;
+    margin: auto;
+    border-style: solid;
+    width: 200px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+.menu.open .menu_options{
+    transform: translateX(0);
+} */ */
