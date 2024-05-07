@@ -32,9 +32,6 @@ function Footer() {
                 <h2>Contacto</h2>
                 <p>Información de contacto...</p>
             </div>
-            <div className="footer-section">
-                <h2>Contacto</h2>
-                <p>Información de contacto...</p>
             </div>
             <div className="footer-section">
                 <h2>Contacto</h2>
