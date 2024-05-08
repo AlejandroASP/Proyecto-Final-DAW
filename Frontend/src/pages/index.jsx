@@ -1,6 +1,6 @@
-import Header from '../src/components/header';
-import Footer from '../src/components/footer';
-import Carrousel from '../src/components/carrousel';
+import Header from '../components/header';
+import Footer from '../components/footer';
+import Carrousel from '../components/carrousel';
 
 
 function Index() {
