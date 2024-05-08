@@ -5,6 +5,7 @@ import Index from './pages/index';
 import Register from './pages/register';
 import EditUser from '../src/pages/edit';
 import Shop from './pages/shop';
+import GameDetails from './pages/gameDetails';
 
 export function App() {
   return (
@@ -16,6 +17,7 @@ export function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/edit' element={<EditUser />} />
           <Route path='/tienda' element={<Shop />} />
+          <Route path='/details' element={<GameDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

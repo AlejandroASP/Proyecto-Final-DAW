@@ -13,23 +13,25 @@ const Header = () => {
         <nav>
           <ul className="flex items-center space-x-6">
             <li>
-              <Link to={'/tienda'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">Tienda</Link>
+              <Link
+                to={'/tienda'}
+                className="text-gray-300 hover:text-white transition duration-300 text-2xl">
+                Tienda
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition duration-300 text-2xl"
-              >
+              <Link
+                to={'/login'}
+                className="text-gray-300 hover:text-white transition duration-300 text-2xl">
                 Iniciar Sesión
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition duration-300 text-2xl"
-              >
-                Registro
-              </a>
+              <Link
+                to={'/register'}
+                className="text-gray-300 hover:text-white transition duration-300 text-2xl">
+                Registrate
+              </Link>
             </li>
             <li>
               <a

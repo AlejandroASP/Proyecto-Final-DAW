@@ -66,44 +66,54 @@ function Register() {
   return (
     <>
       <Header />
-      <div className="content-register">
-        {error && <div onClick={() => setError(null)}>{error}</div>}
-        <form onSubmit={handleSubmit}>
-          <label>
-            Nombre de usuario
-            <input type="text" name="username" required />
-          </label>
-          <label>
-            Nombre
-            <input type="text" name="firstName" required />
-          </label>
-          <label>
-            Apellidos
-            <input type="text" name="lastName" required />
-          </label>
-          <label>
-            Correo electrónico
-            <input type="email" name="email" required />
-          </label>
-          <label>
-            Confirmar correo electrónico
-            <input type="email" name="confirmEmail" required />
-          </label>
-          <label>
-            Contraseña
-            <input type="password" name="password" required />
-          </label>
-          <label>
-            Confirmar contraseña
-            <input type="password" name="confirmPassword" required />
-          </label>
-          <input className='register' type="submit" value="Registrarse" />
-        </form>
-        <div>
-          <p>¿Ya tienes una cuenta? <Link to="/login">Inicia sesion</Link></p>
+      <div className='bg-violet-900'>
+        <div className="min-h-screen flex justify-center items-center">
+          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full sm:max-w-md">
+            <h2 className="text-center text-3xl font-extrabold text-gray-900">Registrarse</h2>
+            {error && <div className="text-red-600 text-center mb-4">{error}</div>}
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="username" className="sr-only">Nombre de usuario</label>
+                  <input id="username" name="username" type="text" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Nombre de usuario" />
+                </div>
+                <div>
+                  <label htmlFor="firstName" className="sr-only">Nombre</label>
+                  <input id="firstName" name="firstName" type="text" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Nombre" />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="sr-only">Apellidos</label>
+                  <input id="lastName" name="lastName" type="text" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Apellidos" />
+                </div>
+                <div>
+                  <label htmlFor="email" className="sr-only">Correo electrónico</label>
+                  <input id="email" name="email" type="email" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Correo electrónico" />
+                </div>
+                <div>
+                  <label htmlFor="confirmEmail" className="sr-only">Confirmar correo electrónico</label>
+                  <input id="confirmEmail" name="confirmEmail" type="email" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirmar correo electrónico" />
+                </div>
+                <div>
+                  <label htmlFor="password" className="sr-only">Contraseña</label>
+                  <input id="password" name="password" type="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Contraseña" />
+                </div>
+                <div>
+                  <label htmlFor="confirmPassword" className="sr-only">Confirmar contraseña</label>
+                  <input id="confirmPassword" name="confirmPassword" type="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirmar contraseña" />
+                </div>
+              </div>
+
+              <div>
+                <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Registrarse</button>
+              </div>
+            </form>
+            <div className="text-center mt-3">
+              <p className="text-sm">¿Ya tienes una cuenta? <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">Inicia sesión</Link></p>
+            </div>
+          </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
