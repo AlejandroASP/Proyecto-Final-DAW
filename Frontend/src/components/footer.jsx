@@ -1,8 +1,16 @@
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-8">
+    <footer className="bg-gray-900 text-white">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 225" style={{ transform: 'scaleY(-1) scaleX(-1)' }}>
+          <path
+            fill="#4c1d95"
+            d="M0,32L80,64C160,96,320,160,480,160C640,160,800,96,960,96C1120,96,1280,160,1360,192L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+          ></path>
+        </svg>
+      </div>
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 py-8">
           {/* Primera columna */}
           <div>
             <h2 className="text-xl font-semibold mb-4">Conócenos</h2>
