@@ -1,4 +1,5 @@
 import logo from '../assets/logo.png'
+import { Link } from 'react-router-dom';
 import "../App.css"
 
 const Header = () => {
@@ -6,18 +7,13 @@ const Header = () => {
     <header className="bg-gray-900">
       <div className="container mx-auto flex items-center justify-between py-8 px-8">
         <div className="flex items-center justify-center">
-          <img src={logo} alt="Logo" className="h-8 w-auto mr-4 rotate-reverse"/>
+          <img src={logo} alt="Logo" className="h-8 w-auto mr-4 rotate-reverse" />
           <h1 className="text-white text-3xl font-semibold">Vortex</h1>
         </div>
         <nav>
           <ul className="flex items-center space-x-6">
             <li>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition duration-300 text-2xl"
-              >
-                Tienda
-              </a>
+              <Link to={'/tienda'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">Tienda</Link>
             </li>
             <li>
               <a
