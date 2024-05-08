@@ -127,7 +127,7 @@ function Register() {
               </div>
             </form>
             <div className="text-center mt-3">
-              <p className="text-sm">¿Ya tienes una cuenta? <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">Inicia sesión</Link></p>
+              <p className="text-sm font-bold">¿Ya tienes una cuenta? <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">Inicia sesión</Link></p>
             </div>
           </div>
         </div>
