@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/header';
 import Footer from '../components/footer';
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid'; // Importa los iconos de ojo y ojo desactivado de Heroicons
 
 function Login() {
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false); // Estado para controlar si se muestra la contraseña o no
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -47,9 +49,17 @@ function Login() {
                                     <label htmlFor="username" className="sr-only">Usuario</label>
                                     <input id="username" name="username" type="text" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Usuario" />
                                 </div>
-                                <div>
+                                <div className="relative">
                                     <label htmlFor="password" className="sr-only">Contraseña</label>
-                                    <input id="password" name="password" type="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Contraseña" />
+                                    <input id="password" name="password" type={showPassword ? "text" : "password"} required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Contraseña" />
+                                    {/* Botón de ojo para mostrar/ocultar la contraseña */}
+                                    <button
+                                        type="button"
+                                        className="absolute inset-y-0 right-0 flex items-center pr-3"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? <EyeOffIcon className="h-5 w-5 text-gray-400" /> : <EyeIcon className="h-5 w-5 text-gray-400" />}
+                                    </button>
                                 </div>
                             </div>
 
