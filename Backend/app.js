@@ -174,5 +174,31 @@ app.get('/get-user', (req, res) => {
     });
 });
 
+// Query para sacar los productos de la base de datos
+app.get('/tienda', (req, res) => {
+    // Realiza la consulta para obtener los nombres de los juegos
+    const sql = 'SELECT nombre FROM game';
+
+    // Ejecuta la consulta en la base de datos
+    db.query(sql, (error, results) => {
+        if (error) {
+            console.error(error);
+            // Si hay un error, envía una respuesta de error al cliente
+            res.status(500).send({ message: 'Error al obtener los nombres de los juegos' });
+            return;
+        }
+
+        if (results.length === 0) {
+            // Si no se encuentran juegos, envía una respuesta de error al cliente
+            res.status(404).send({ message: 'No se encontraron juegos' });
+            return;
+        }
+
+        // Envía los nombres de los juegos como respuesta al cliente
+        res.json(results);
+    });
+});
+
+
 
 app.listen(5173, () => console.log('El servidor está corriendo en el puerto 5173'));
