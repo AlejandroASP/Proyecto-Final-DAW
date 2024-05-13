@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 py-8">
           {/* Primera columna */}
-          <div>
+          <div className="mb-8 md:mb-0 text-center md:text-left">
             <h2 className="text-xl font-semibold mb-4">Conócenos</h2>
             <ul className="space-y-2">
               <li>
@@ -43,7 +43,7 @@ const Footer = () => {
             </ul>
           </div>
           {/* Segunda columna */}
-          <div>
+          <div className="mb-8 md:mb-0 text-center md:text-left">
             <h2 className="text-xl font-semibold mb-4">Atención al cliente</h2>
             <ul className="space-y-2">
               <li>
@@ -74,7 +74,7 @@ const Footer = () => {
             </ul>
           </div>
           {/* Tercera columna */}
-          <div>
+          <div className="mb-8 md:mb-0 text-center md:text-left">
             <h2 className="text-xl font-semibold mb-4">Síguenos</h2>
             <ul className="space-y-2">
               <li>
@@ -130,7 +130,7 @@ const Footer = () => {
             </ul>
           </div>
           {/* Cuarta columna */}
-          <div>
+          <div className="text-center md:text-left">
             <h2 className="text-xl font-semibold mb-4">Legal</h2>
             <ul className="space-y-2">
               <li>
@@ -150,7 +150,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="hover:text-gray-300">
-                  pólitica de cookies
+                  Pólitica de cookies
                 </a>
               </li>
               <li>
