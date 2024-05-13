@@ -10,7 +10,7 @@ dotenv.config();
 //   dialect: 'mysql',
 // });
 
-const sequelize = new Sequelize('rincon-canino', 'remote', process.env.MYSQL_PASSWORD, {
+const sequelize = new Sequelize('vortexdb', 'Vortex_Admin', process.env.MYSQL_PASSWORD, {
   host: 'localhost',
   port: 3306,
   dialect: 'mysql',

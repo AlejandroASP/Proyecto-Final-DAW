@@ -40,11 +40,12 @@ function Register() {
       firstName,
       lastName,
       email,
-      password
+      password,
+      rol: 'user'
     };
 
     // Hace una petición POST al servidor para registrar al usuario
-    fetch('/register', {
+    fetch('http://localhost:3002/api/user/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +63,7 @@ function Register() {
         }
       })
       .catch((error) => {
-        console.error('Error:', error);
+        alert(error);
       });
   };
 
@@ -78,27 +79,27 @@ function Register() {
               <div className="space-y-4">
                 <div>
                   <label htmlFor="username" className="sr-only">Nombre de usuario</label>
-                  <input id="username" name="username" type="text" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Nombre de usuario" />
+                  <input id="username" name="username" type="text" required className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Nombre de usuario" />
                 </div>
                 <div>
                   <label htmlFor="firstName" className="sr-only">Nombre</label>
-                  <input id="firstName" name="firstName" type="text" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Nombre" />
+                  <input id="firstName" name="firstName" type="text" required className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Nombre" />
                 </div>
                 <div>
                   <label htmlFor="lastName" className="sr-only">Apellidos</label>
-                  <input id="lastName" name="lastName" type="text" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Apellidos" />
+                  <input id="lastName" name="lastName" type="text" required className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Apellidos" />
                 </div>
                 <div>
                   <label htmlFor="email" className="sr-only">Correo electrónico</label>
-                  <input id="email" name="email" type="email" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Correo electrónico" />
+                  <input id="email" name="email" type="email" required className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Correo electrónico" />
                 </div>
                 <div>
                   <label htmlFor="confirmEmail" className="sr-only">Confirmar correo electrónico</label>
-                  <input id="confirmEmail" name="confirmEmail" type="email" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirmar correo electrónico" />
+                  <input id="confirmEmail" name="confirmEmail" type="email" required className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirmar correo electrónico" />
                 </div>
                 <div className="relative">
                   <label htmlFor="password" className="sr-only">Contraseña</label>
-                  <input id="password" name="password" type={showPassword ? "text" : "password"} required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Contraseña" />
+                  <input id="password" name="password" type={showPassword ? "text" : "password"} required className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Contraseña" />
                   {/* Botón de ojo para mostrar/ocultar la contraseña */}
                   <button
                     type="button"
@@ -110,7 +111,7 @@ function Register() {
                 </div>
                 <div className="relative">
                   <label htmlFor="confirmPassword" className="sr-only">Confirmar contraseña</label>
-                  <input id="confirmPassword" name="confirmPassword" type={showConfirmPassword ? "text" : "password"} required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirmar contraseña" />
+                  <input id="confirmPassword" name="confirmPassword" type={showConfirmPassword ? "text" : "password"} required className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirmar contraseña" />
                   {/* Botón de ojo para mostrar/ocultar la contraseña repetida */}
                   <button
                     type="button"

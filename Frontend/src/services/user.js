@@ -1,21 +1,24 @@
 const url = "http://localhost:3002/api";
 
-export const updatePassword = async (email, password, newPassword) => {
+export const registerUser = async (username, firstName, lastName, email, password, rol) => {
   try {
-    const response = await fetch(`${url}/admin`, {
-      method: "PUT",
+    const response = await fetch(`${url}/user/register`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        username,
+        firstName,
+        lastName,
         email,
         password,
-        newPassword,
+        rol,
       }),
     });
 
     if (!response.ok) {
-      throw new Error("401");
+      throw new Error("Error de red: no se pudo conectar al servidor");
     }
 
     let responseJSON = await response.json();
