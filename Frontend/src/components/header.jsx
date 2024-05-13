@@ -34,12 +34,12 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to={'/cart'}
                 className="text-gray-300 hover:text-white transition duration-300 text-2xl"
               >
-                Soporte
-              </a>
+                Carrito
+              </Link>
             </li>
           </ul>
         </nav>

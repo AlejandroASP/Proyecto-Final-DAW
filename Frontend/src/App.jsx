@@ -6,6 +6,7 @@ import Register from './pages/register';
 import EditUser from '../src/pages/edit';
 import Shop from './pages/shop';
 import GameDetails from './pages/gameDetails';
+import Cart from './pages/cart';
 
 export function App() {
   return (
@@ -18,6 +19,7 @@ export function App() {
           <Route path='/edit' element={<EditUser />} />
           <Route path='/tienda' element={<Shop />} />
           <Route path='/details' element={<GameDetails />} />
+          <Route path='/cart' element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </div>
