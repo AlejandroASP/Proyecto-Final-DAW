@@ -51,6 +51,14 @@ const Header = () => {
                 Carrito
               </Link>
             </li>
+            <li>
+              <Link
+                to={'/user'}
+                className="text-gray-300 hover:text-white transition duration-300 text-2xl"
+              >
+                Perfil
+              </Link>
+            </li>
           </ul>
         </nav>
         {/* Botón de hamburguesa para dispositivos móviles */}
@@ -109,6 +117,14 @@ const Header = () => {
                 onClick={toggleMenu}
               >
                 Carrito
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={'/user'}
+                className="text-gray-300 hover:text-white transition duration-300 text-2xl"
+              >
+                Perfil
               </Link>
             </li>
           </ul>
