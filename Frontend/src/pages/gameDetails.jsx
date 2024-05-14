@@ -77,7 +77,7 @@ function GameDetails() {
                     </div>
                     <div className="flex flex-col md:flex-row">
                         {/* Imagen del juego */}
-                        <div className="md:w-1/3 p-4 flex flex-col justify-between">
+                        <div className="md:w-2/4 p-4 flex flex-col justify-between">
                             <img
                                 src={game.img} // Usar la URL de la imagen del juego
                                 alt={game.nombre} // Usar el nombre del juego como alternativa de la imagen
@@ -107,11 +107,15 @@ function GameDetails() {
                                 <p className="text-gray-600 mb-2">
                                     Género: {game.genre}
                                 </p>
+                                {/* Precio */}
+                                <p className="text-gray-600 mb-2 text-green-600">
+                                    Precio: {game.precio} €
+                                </p>
                             </div>
                             {/* Descripción */}
                             <div className="mt-4">
                                 <p className="text-gray-600">
-                                    {game.descripcion}
+                                    {game.detalles}
                                 </p>
                             </div>
                         </div>
