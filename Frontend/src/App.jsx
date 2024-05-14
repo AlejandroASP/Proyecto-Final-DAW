@@ -19,7 +19,7 @@ export function App() {
           <Route path='/register' element={<Register />} />
 
           <Route path='/tienda' element={<Shop />} />
-          <Route path='/details' element={<GameDetails />} />
+          <Route path='/details/:gameId' element={<GameDetails />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/user' element={<User />} />
         </Routes>
