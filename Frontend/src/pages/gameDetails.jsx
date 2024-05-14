@@ -1,17 +1,36 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom'; // Importar useParams
 import Header from '../components/header';
 import Footer from '../components/footer';
 
 function GameDetails() {
-    const [rating, setRating] = useState(0); // Estado para la calificación
+    const [game, setGame] = useState(null); // Estado para almacenar la información del juego
+    const [rating, setRating] = useState(0);
 
-    // Función para manejar el cambio de calificación al hacer clic
+    const { gameId } = useParams(); // Obtener el ID del juego de la URL
+
+    useEffect(() => {
+        fetch(`http://localhost:3002/api/game/${gameId}`, {
+            method: 'GET'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setGame(data); // Almacenar los detalles del juego en el estado
+            })
+            .catch(error => {
+                console.error('Error fetching game details:', error);
+            });
+    }, [gameId]); // Se ejecutará cada vez que cambie el ID del juego
+
     const handleRatingClick = (value) => {
         setRating(value === rating ? 0 : value);
     };
 
-    // Función para manejar el cambio de calificación al hacer hover
     const handleRatingHover = (value) => {
         setRating(value);
     };
@@ -34,6 +53,15 @@ function GameDetails() {
         );
     }
 
+    // Si aún no se ha cargado la información del juego, mostrar un mensaje de carga
+    if (!game) {
+        return (
+            <div className="bg-violet-900 min-h-screen flex flex-col justify-center items-center">
+                <p className="text-white">Cargando...</p>
+            </div>
+        );
+    }
+
     return (
         <>
             <Header />
@@ -51,8 +79,8 @@ function GameDetails() {
                         {/* Imagen del juego */}
                         <div className="md:w-1/3 p-4 flex flex-col justify-between">
                             <img
-                                src="https://unavatar.io/kikobeats"
-                                alt="imagen producto"
+                                src={game.img} // Usar la URL de la imagen del juego
+                                alt={game.nombre} // Usar el nombre del juego como alternativa de la imagen
                                 className="w-full h-auto mb-2"
                             />
                             {/* Botón de añadir al carro (no funcional) */}
@@ -69,7 +97,7 @@ function GameDetails() {
                             <div>
                                 {/* Título */}
                                 <h2 className="text-2xl font-bold mb-2">
-                                    Título del Juego
+                                    {game.nombre}
                                 </h2>
                                 {/* Valoración */}
                                 <div className="flex items-center mb-2">
@@ -77,22 +105,13 @@ function GameDetails() {
                                 </div>
                                 {/* Género */}
                                 <p className="text-gray-600 mb-2">
-                                    Género: Acción
+                                    Género: {game.genre}
                                 </p>
                             </div>
                             {/* Descripción */}
                             <div className="mt-4">
                                 <p className="text-gray-600">
-                                    Breve descripción del juego Lorem ipsum
-                                    dolor sit amet, consectetur adipiscing elit.
-                                    Sed sit amet libero nec justo accumsan
-                                    feugiat. Proin fermentum rutrum ligula sit
-                                    amet volutpat. Integer efficitur, nisi in
-                                    convallis viverra, justo libero fermentum
-                                    neque, nec gravida lectus justo ac felis.
-                                    Vivamus convallis pharetra augue, nec
-                                    scelerisque quam interdum vel. Nullam ac
-                                    pretium nulla.
+                                    {game.descripcion}
                                 </p>
                             </div>
                         </div>
