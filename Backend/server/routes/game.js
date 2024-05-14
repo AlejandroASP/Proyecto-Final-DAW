@@ -7,15 +7,16 @@ const router = express.Router();
 
 // Obtener todos los juegos
 router.get("/", async (req, res) => {
-  try {
-    console.log("Request received to fetch all games"); // Agregar este registro de consola
-    const games = await Game.findAll();
-    res.json(games);
-  } catch (error) {
-    console.error("Error al obtener los juegos:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
-  }
-});
+    try {
+      const { genre_id } = req.query;  // Obtener el parámetro de consulta genre_id
+      const whereClause = genre_id ? { genre_id } : {};  // Crear cláusula where si genre_id está presente
+      const games = await Game.findAll({ where: whereClause });  // Buscar juegos con el filtro
+      res.json(games);
+    } catch (error) {
+      console.error("Error al obtener los juegos:", error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
+  });
 
 // Obtener un juego por su ID
 router.get("/:id", async (req, res) => {

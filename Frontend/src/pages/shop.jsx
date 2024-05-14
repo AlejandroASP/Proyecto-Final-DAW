@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Header from '../components/header';
 import Footer from '../components/footer';
-import { Link } from 'react-router-dom'; // Importar Link desde react-router-dom
+import { Link } from 'react-router-dom';
 
 function Tienda() {
     const [productos, setProductos] = useState([]);
@@ -10,25 +10,31 @@ function Tienda() {
     const [paginaActual, setPaginaActual] = useState(1);
     const juegosPorPagina = 6;
     const [hoverIndex, setHoverIndex] = useState(null);
+    const [genres, setGenres] = useState([]);
+    const [selectedGenre, setSelectedGenre] = useState('');
 
+    // Obtener los géneros al cargar el componente
     useEffect(() => {
-        fetch('http://localhost:3002/api/game/', {
-            method: 'GET'
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
+        fetch('http://localhost:3002/api/genre/')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Genres fetched:', data);
+                setGenres(data);
             })
+            .catch(error => console.error('Error fetching genres:', error));
+    }, []);
+
+    // Obtener los juegos, posiblemente filtrados por género
+    useEffect(() => {
+        const genreQuery = selectedGenre ? `?genre_id=${selectedGenre}` : '';
+        fetch(`http://localhost:3002/api/game/${genreQuery}`)
+            .then(response => response.json())
             .then(data => {
                 setProductos(data);
                 setProductosFiltrados(data);
             })
-            .catch(error => {
-                console.error('Error fetching games:', error);
-            });
-    }, []);
+            .catch(error => console.error('Error fetching games:', error));
+    }, [selectedGenre]);
 
     useEffect(() => {
         const productosFiltrados = productos.filter(producto =>
@@ -53,17 +59,41 @@ function Tienda() {
         setPaginaActual(nuevaPagina);
     };
 
+    const handleGenreClick = (genreId) => {
+        setSelectedGenre(genreId);
+        setPaginaActual(1); // Resetear a la primera página al cambiar de género
+    };
+
     return (
         <>
             <Header />
             <div className="bg-violet-900 min-h-screen flex flex-col justify-center items-center">
-                <input
-                    type="text"
-                    placeholder="Buscar productos"
-                    value={busqueda}
-                    onChange={e => setBusqueda(e.target.value)}
-                    className="border border-gray-300 rounded-md px-3 py-2 mb-4 w-full max-w-md"
-                />
+                <div className="flex justify-center mb-4 w-full max-w-md">
+                    <input
+                        type="text"
+                        placeholder="Buscar productos"
+                        value={busqueda}
+                        onChange={e => setBusqueda(e.target.value)}
+                        className="border border-gray-300 rounded-md px-3 py-2 mb-2"
+                    />
+                </div>
+                <div className="flex flex-wrap justify-center space-x-0 space-y-2 sm:space-x-2 sm:space-y-0 md:space-x-4 lg:space-x-6 mb-4">
+                    <button
+                        onClick={() => handleGenreClick('')}
+                        className={`px-4 py-2 rounded-md ${selectedGenre === '' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'}`}
+                    >
+                        Todos los géneros
+                    </button>
+                    {genres.map(genre => (
+                        <button
+                            key={genre.id}
+                            onClick={() => handleGenreClick(genre.id)}
+                            className={`px-4 py-2 rounded-md ${selectedGenre === genre.id ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'}`}
+                        >
+                            {genre.nombre}
+                        </button>
+                    ))}
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
                     {juegosEnPaginaActual.map((producto, index) => (
                         <div key={index}
@@ -71,10 +101,14 @@ function Tienda() {
                                 ${hoverIndex === index ? 'bg-opacity-80' : 'bg-opacity-100'}`}
                             onMouseEnter={() => setHoverIndex(index)}
                             onMouseLeave={() => setHoverIndex(null)}>
+                            <img
+                                src={producto.img}
+                                alt={producto.nombre}
+                                className="w-full h-auto mb-2"
+                            />
                             <h3 className="text-lg font-bold mb-2">{producto.nombre}</h3>
                             {hoverIndex === index && (
                                 <Link to={`/details/${producto.id}`} className="absolute inset-0 flex justify-center items-center">
-                                    <p className="text-white">Detalles de juego</p>
                                 </Link>
                             )}
                         </div>
