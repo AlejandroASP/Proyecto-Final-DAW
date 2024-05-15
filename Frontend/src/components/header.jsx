@@ -16,6 +16,7 @@ const Header = () => {
         <div className="flex items-center justify-center">
           <img src={logo} alt="Logo" className="h-8 w-auto mr-4 rotate-reverse" />
           <Link to={'/'} className="text-gray-300 hover:text-white transition duration-300 text-3xl font-semibold">Vortex</Link>
+          <Link to={'/'} className="text-white hover:text-white text-3xl font-semibold">Vortex</Link>
         </div>
         <nav className="hidden md:flex flex-grow justify-center">
           <ul className="flex items-center space-x-6">
