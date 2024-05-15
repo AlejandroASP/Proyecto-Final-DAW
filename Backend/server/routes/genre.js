@@ -12,5 +12,18 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Obtener un género por su ID
+router.get('/:genreId', async (req, res) => {
+    const { genreId } = req.params;
+    try {
+        const genre = await Genre.findByPk(genreId);
+        if (!genre) {
+            return res.status(404).json({ error: "Género no encontrado" });
+        }
+        res.json(genre);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 export default router;

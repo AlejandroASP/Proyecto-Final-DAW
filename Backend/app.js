@@ -180,6 +180,7 @@ import express from 'express';
 import cors from 'cors';
 import winston from 'winston';
 import './server/db.js';
+import './models/associations.js';
 
 // import cartRouter from './server/routes/cart.js'; // Asumiendo que tienes un archivo cart.js en la carpeta routes
 import gameRouter from './server/routes/game.js'; // Asumiendo que tienes un archivo game.js en la carpeta routes
@@ -204,8 +205,10 @@ export const logger = winston.createLogger({
 });
 
 app.use(cors(corsOptions));
-app.use(express.json({limit: '50mb'}));
+app.use(express.json({ limit: '50mb' }));
 // app.use(express.urlencoded({limit: '50mb'}));
+
+import './models/associations.js'; 
 
 // app.use('/api/cart', cartRouter);
 app.use('/api/game', gameRouter);

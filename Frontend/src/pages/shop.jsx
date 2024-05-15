@@ -27,14 +27,22 @@ function Tienda() {
     // Obtener los juegos, posiblemente filtrados por género
     useEffect(() => {
         const genreQuery = selectedGenre ? `?genre_id=${selectedGenre}` : '';
-        fetch(`http://localhost:3002/api/game/${genreQuery}`)
-            .then(response => response.json())
+        fetch(`http://localhost:3002/api/game${genreQuery}`, {
+            method: 'GET'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 setProductos(data);
                 setProductosFiltrados(data);
             })
             .catch(error => console.error('Error fetching games:', error));
     }, [selectedGenre]);
+
 
     useEffect(() => {
         const productosFiltrados = productos.filter(producto =>
