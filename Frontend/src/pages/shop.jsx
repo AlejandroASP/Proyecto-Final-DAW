@@ -102,7 +102,7 @@ function Tienda() {
                         </button>
                     ))}
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-10">
                     {juegosEnPaginaActual.map((producto, index) => (
                         <div key={index}
                             className={`bg-blue-200 p-4 rounded-md shadow-md relative overflow-hidden flex flex-col items-center transition-colors duration-300 
