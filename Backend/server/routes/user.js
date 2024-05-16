@@ -38,10 +38,75 @@ router.post("/login", async (req, res) => {
   res.json({ token });
 });
 
+// Obtener información del usuario
+router.get("/profile", async (req, res) => {
+  const { username } = req.query;
+
+  if (username === undefined) {
+    logger.error("Usuario indefinido");
+    res.json({ error: "Usuario incorrecto" });
+    return;
+  }
+
+  const user = await User.findOne({
+    where: {
+      usuario: username,
+    },
+  });
+
+  if (!user) {
+    logger.error("Usuario no encontrado");
+    res.json({ error: "Usuario no encontrado" });
+    return;
+  }
+
+  // No devuelvas la contraseña en la respuesta
+  const { contraseña, ...userWithoutPassword } = user.dataValues;
+
+  logger.info(`Información del usuario ${username} obtenida`);
+  res.json(userWithoutPassword);
+});
+
+// Actualizar información del usuario
+router.put("/profile", async (req, res) => {
+  const { username, firstName, lastName, email } = req.body;
+
+  if (
+    username === undefined ||
+    firstName === undefined ||
+    lastName === undefined ||
+    email === undefined
+  ) {
+    logger.error("Datos del usuario indefinidos");
+    res.json({ error: "Datos del usuario incorrectos" });
+    return;
+  }
+
+  const user = await User.findOne({
+    where: {
+      usuario: username,
+    },
+  });
+
+  if (!user) {
+    logger.error("Usuario no encontrado");
+    res.json({ error: "Usuario no encontrado" });
+    return;
+  }
+
+  user.nombre = firstName;
+  user.apellido = lastName;
+  user.email = email;
+  await user.save();
+
+  logger.info(`Usuario ${username} actualizado`);
+  res.json({ message: "Perfil actualizado" });
+});
+
 // Cambiar contraseña
 router.put("/change-password", async (req, res) => {
   const { username, password, newPassword } = req.body;
-  
+
   if (
     username === undefined ||
     password === undefined ||
@@ -96,6 +161,5 @@ router.post("/register", async (req, res) => {
   logger.info(`Nuevo usuario registrado: ${username}`);
   res.json({ success: true });
 });
-
 
 export default router;
