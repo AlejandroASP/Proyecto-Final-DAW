@@ -1,22 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import '../App.css';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false); // Inicializamos el menú cerrado
+  const [username, setUsername] = useState(null);
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen); // Alternamos el estado del menú
+    setMenuOpen(!menuOpen);
   };
 
+  useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+        const storedUsername = sessionStorage.getItem('username');
+        setUsername(storedUsername);
+    }
+}, []);
   return (
     <header className="bg-gray-900">
       <div className="container mx-auto flex items-center justify-between py-8 px-8">
         <div className="flex items-center justify-center">
           <img src={logo} alt="Logo" className="h-8 w-auto mr-4 rotate-reverse" />
           <Link to={'/'} className="text-gray-300 hover:text-white transition duration-300 text-3xl font-semibold">Vortex</Link>
-          <Link to={'/'} className="text-white hover:text-white text-3xl font-semibold">Vortex</Link>
         </div>
         <nav className="hidden md:flex flex-grow justify-center">
           <ul className="flex items-center space-x-6">
@@ -131,6 +138,9 @@ const Header = () => {
           </ul>
         </nav>
       )}
+      {username && (
+                <p className="text-white text-center mt-4">Bienvenido, {username}</p>
+            )}
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 225">
           <path
             fill="#4c1d95"
