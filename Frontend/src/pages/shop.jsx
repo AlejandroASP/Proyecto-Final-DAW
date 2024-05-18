@@ -8,7 +8,7 @@ function Tienda() {
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [paginaActual, setPaginaActual] = useState(1);
-  const juegosPorPagina = 6;
+  const juegosPorPagina = 8;
   const [hoverIndex, setHoverIndex] = useState(null);
   const [genres, setGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("");
@@ -114,7 +114,7 @@ function Tienda() {
             </button>
           ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-6 xl:grid-cols-8 gap-5 mx-3">
           {juegosEnPaginaActual.map((producto, index) => (
             <div
               key={index}
