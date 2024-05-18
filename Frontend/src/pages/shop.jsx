@@ -4,11 +4,33 @@ import Footer from "../components/footer";
 import { Link } from "react-router-dom";
 
 function Tienda() {
+
+  // Sacar el tamaño de la página
+  const useScreenSize = () => {
+    const [width, setWidth] = useState(window.innerWidth);
+  
+    useEffect(() => {
+      const handleResize = () => {
+        setWidth(window.innerWidth);
+      };
+  
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
+  
+    return width;
+  };
+  
+  const screenSize = useScreenSize();
+  const juegosPorPagina = screenSize >= 1280 ? 8 : 6; // Cambia los valores según tus necesidades
+
+
   const [productos, setProductos] = useState([]);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [paginaActual, setPaginaActual] = useState(1);
-  const juegosPorPagina = 8;
   const [hoverIndex, setHoverIndex] = useState(null);
   const [genres, setGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("");
@@ -114,7 +136,7 @@ function Tienda() {
             </button>
           ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-6 xl:grid-cols-8 gap-5 mx-3">
+        <div className="grid md:grid-rows-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mx-3">
           {juegosEnPaginaActual.map((producto, index) => (
             <div
               key={index}
