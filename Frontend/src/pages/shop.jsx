@@ -3,26 +3,27 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { Link } from "react-router-dom";
 
+
 function Tienda() {
 
   // Sacar el tamaño de la página
   const useScreenSize = () => {
     const [width, setWidth] = useState(window.innerWidth);
-  
+
     useEffect(() => {
       const handleResize = () => {
         setWidth(window.innerWidth);
       };
-  
+
       window.addEventListener("resize", handleResize);
       return () => {
         window.removeEventListener("resize", handleResize);
       };
     }, []);
-  
+
     return width;
   };
-  
+
   const screenSize = useScreenSize();
   const juegosPorPagina = screenSize >= 1280 ? 8 : 6; // Cambia los valores según tus necesidades
 
@@ -102,50 +103,52 @@ function Tienda() {
     <>
       <Header />
       <div className="bg-gradient-to-b from-violet-900 to-pink-900 min-h-screen flex flex-col justify-center items-center">
-        <div className="flex justify-center mb-4 w-full max-w-md">
+        <div className="relative flex justify-center mb-4 w-full max-w-md px-4">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          </div>
           <input
             type="text"
-            placeholder="Buscar productos"
+            placeholder="Buscar juegos"
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
-            className="border border-gray-300 rounded-md px-3 py-2 mb-2"
+            className="w-full border border-gray-300 rounded-md py-2 mb-10 text-center"
           />
         </div>
-        <div className="flex flex-wrap justify-center space-x-0 space-y-2 sm:space-x-2 sm:space-y-0 md:space-x-4 lg:space-x-6 mb-4">
-          <button
-            onClick={() => handleGenreClick("")}
-            className={`px-4 py-2 rounded-md ${
-              selectedGenre === ""
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300 text-black"
-            }`}
-          >
-            Todos los géneros
-          </button>
-          {genres.map((genre) => (
+        <div className="w-full bg-gradient-to-r from-black-600 via-purple-700 to-orange-700 py-4 mb-4 rounded-md">
+          <div className="flex flex-wrap justify-center items-center w-full max-w-screen-lg mx-auto gap-2 px-4">
             <button
-              key={genre.id}
-              onClick={() => handleGenreClick(genre.id)}
-              className={`px-4 py-2 rounded-md ${
-                selectedGenre === genre.id
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-300 text-black"
-              }`}
+              onClick={() => handleGenreClick("")}
+              className={`flex-grow md:flex-grow-0 px-4 py-2 rounded-md text-sm md:text-base ${selectedGenre === ""
+                ? "bg-black text-white"
+                : "bg-gray-300 text-black"
+                }`}
             >
-              {genre.nombre}
+              Todos los géneros
             </button>
-          ))}
+            {genres.map((genre) => (
+              <button
+                key={genre.id}
+                onClick={() => handleGenreClick(genre.id)}
+                className={`flex-grow md:flex-grow-0 px-4 py-2 rounded-md text-sm md:text-base ${selectedGenre === genre.id
+                  ? "bg-black text-white"
+                  : "bg-gray-300 text-black"
+                  }`}
+              >
+                {genre.nombre}
+              </button>
+            ))}
+          </div>
         </div>
+
         <div className="grid md:grid-rows-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mx-3">
           {juegosEnPaginaActual.map((producto, index) => (
             <div
               key={index}
               className={`bg-blue-200 p-4 rounded-md shadow-md relative overflow-hidden flex flex-col items-center transition-colors duration-300 
-                                ${
-                                  hoverIndex === index
-                                    ? "bg-opacity-80"
-                                    : "bg-opacity-100"
-                                }`}
+                                ${hoverIndex === index
+                  ? "bg-opacity-80"
+                  : "bg-opacity-100"
+                }`}
               onMouseEnter={() => setHoverIndex(index)}
               onMouseLeave={() => setHoverIndex(null)}
             >
