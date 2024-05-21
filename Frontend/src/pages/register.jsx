@@ -72,8 +72,8 @@ function Register() {
       <Header />
       <div className="bg-gradient-to-b from-violet-900 to-pink-900">
         <div className="min-h-screen flex justify-center items-center">
-          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full sm:max-w-md">
-            <h2 className="text-center text-3xl font-extrabold text-gray-900">
+          <div className="bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full sm:max-w-md">
+            <h2 className="text-center text-3xl font-extrabold text-white">
               Registrarse
             </h2>
             {error && (
@@ -208,7 +208,7 @@ function Register() {
               </div>
             </form>
             <div className="text-center mt-3">
-              <p className="text-sm font-bold">
+              <p className="text-sm text-white">
                 ¿Ya tienes una cuenta?{" "}
                 <Link
                   to="/login"

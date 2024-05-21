@@ -60,8 +60,8 @@ function User() {
     <>
       <Header />
       <div className="bg-gradient-to-b from-violet-900 to-pink-900 p-3 min-h-screen flex items-center">
-        <div className="container px-8 pt-6 pb-8 mx-auto flex flex-col bg-white rounded md:w-2/3">
-          <h1 className="text-2xl text-3xl font-extrabold text-gray-900 mb-4">
+        <div className="container px-8 pt-6 pb-8 mx-auto flex flex-col bg-black bg-opacity-45 border border-white-500 border-4 rounded md:w-2/3">
+          <h1 className="text-2xl text-3xl font-extrabold text-white mb-4">
             Editar Perfil
           </h1>
           <div className="flex flex-col md:flex-row md:items-center">
@@ -69,7 +69,7 @@ function User() {
             <div className="mb-4 md:mr-8 md:w-1/3 flex justify-center md:justify-start flex flex-col items-center">
               <label
                 htmlFor="profileImage"
-                className="block text-gray-700 font-bold"
+                className="block text-white mb-1"
               >
                 Imagen de Perfil
               </label>
@@ -95,7 +95,7 @@ function User() {
               <div className="mb-4">
                 <label
                   htmlFor="firstName"
-                  className="block text-gray-700 font-bold mb-2 "
+                  className="block text-white mb-2 "
                 >
                   Nombre
                 </label>
@@ -111,7 +111,7 @@ function User() {
               <div className="mb-4">
                 <label
                   htmlFor="lastName"
-                  className="block text-gray-700 font-bold mb-2"
+                  className="block text-white mb-2"
                 >
                   Apellido
                 </label>
@@ -127,7 +127,7 @@ function User() {
               <div className="mb-4">
                 <label
                   htmlFor="email"
-                  className="block text-gray-700 font-bold mb-2"
+                  className="block text-white mb-2"
                 >
                   Correo Electrónico
                 </label>
@@ -143,7 +143,7 @@ function User() {
               <div className="mb-4">
                 <label
                   htmlFor="password"
-                  className="block text-gray-700 font-bold mb-2"
+                  className="block text-white mb-2"
                 >
                   Contraseña
                 </label>
@@ -159,7 +159,7 @@ function User() {
               <div className="mb-4">
                 <label
                   htmlFor="confirmPassword"
-                  className="block text-gray-700 font-bold mb-2"
+                  className="block text-white mb-2"
                 >
                   Confirmar Contraseña
                 </label>
@@ -174,7 +174,7 @@ function User() {
               </div>
               <button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
               >
                 Guardar Cambios
               </button>
