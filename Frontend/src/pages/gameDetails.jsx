@@ -59,9 +59,8 @@ function GameDetails() {
     stars.push(
       <span
         key={i}
-        className={`text-2xl ${
-          rating >= i ? "text-yellow-400" : "text-gray-400"
-        } cursor-pointer`}
+        className={`text-2xl ${rating >= i ? "text-yellow-400" : "text-gray-400"
+          } cursor-pointer`}
         onMouseEnter={() => handleRatingHover(i)}
         onMouseLeave={() => handleRatingHover(0)}
         onClick={() => handleRatingClick(i)}
@@ -82,14 +81,14 @@ function GameDetails() {
   return (
     <>
       <Header />
-      <div className="bg-gradient-to-b from-violet-900 to-pink-900 min-h-screen flex flex-col justify-center items-center">
-        <div className="max-w-4xl w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="bg-gradient-to-b from-violet-900 to-pink-900 min-h-screen flex flex-col items-center pt-8">
+        <div className="max-w-4xl w-full bg-black bg-opacity-45 mb-8 border border-white-500 border-4 shadow-md rounded-lg overflow-hidden">
           <div className="p-4">
-            <Link to="/tienda" className="text-blue-500 hover:underline">
+            <Link to="/tienda" className="text-blue-500 hover:text-yellow-200">
               Tienda
             </Link>
             <span className="mx-2">{">"}</span>
-            <span>Detalles</span>
+            <span className="text-white">Detalles sobre {game.nombre}</span>
           </div>
           <div className="flex flex-col md:flex-row">
             <div className="md:w-2/4 p-4 flex flex-col justify-between">
@@ -99,11 +98,10 @@ function GameDetails() {
                 className="w-full h-auto mb-2"
               />
               <button
-                className={`font-bold py-2 px-4 rounded ${
-                  !sessionStorage.getItem("token")
-                    ? "bg-yellow-500 hover:bg-yellow-700"
-                    : "bg-blue-500 hover:bg-blue-700 text-white"
-                }`}
+                className={`font-bold py-2 px-4 rounded ${!sessionStorage.getItem("token")
+                  ? "bg-yellow-500 hover:bg-yellow-700"
+                  : "bg-blue-800 hover:bg-blue-700 text-white"
+                  }`}
                 onClick={() => {
                   if (!sessionStorage.getItem("token")) {
                     window.location.href = "/login";
@@ -122,22 +120,25 @@ function GameDetails() {
             </div>
             <div className="md:w-2/3 p-4">
               <div>
-                <h2 className="text-2xl font-bold mb-2">{game.nombre}</h2>
+                <h2 className="text-2xl font-bold mb-2 text-orange-500">{game.nombre}</h2>
                 <div className="flex items-center mb-2">{stars}</div>
-                <p className="text-gray-600 mb-2">
-                  Género: {genreName ? genreName : "Desconocido"}
+                <p className="text-gray-600 mb-2 text-white">
+                  Género: <span className="text-yellow-400">{genreName ? genreName : "Desconocido"}</span>
                 </p>
-                <p className="text-gray-600 mb-2 text-green-600">
+
+                <p className="text-gray-600 mb-2 text-green-500">
                   Precio: {game.precio} €
                 </p>
               </div>
               <div className="mt-4">
-                <p className="text-gray-600">{game.detalles}</p>
+                <p className="text-gray-600 text-white text-justify">{game.detalles}</p>
               </div>
             </div>
           </div>
-          <div className="p-4 bg-gray-100 mt-4">
-            <h3 className="text-xl font-bold mb-2">
+        </div>
+        <div className="max-w-4xl w-full mt-8 bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded-lg overflow-hidden">
+          <div className="p-4">
+            <h3 className="text-xl text-white font-bold mb-4">
               Juegos de la misma categoría
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
