@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 
 function Tienda() {
+  const { t } = useTranslation();
   const useScreenSize = () => {
     const [width, setWidth] = useState(window.innerWidth);
 
@@ -122,7 +125,7 @@ function Tienda() {
                 : "bg-gray-300 text-black"
                 }`}
             >
-              Todos los géneros
+              {t('all_genres')}
             </button>
             {genres.map((genre) => (
               <button
@@ -171,17 +174,17 @@ function Tienda() {
             disabled={paginaActual === 1}
             className="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded"
           >
-            Anterior
+            {t('before')}
           </button>
           <span className="mx-2 text-white">
-            Página {paginaActual} de {numeroTotalPaginas}
+          {t('page')} {paginaActual} {t('of')} {numeroTotalPaginas}
           </span>
           <button
             onClick={irPaginaSiguiente}
             disabled={paginaActual === numeroTotalPaginas}
             className="ml-2 px-4 py-2 bg-gray-300 text-gray-700 rounded"
           >
-            Siguiente
+            {t('after')}
           </button>
         </div>
       </div>

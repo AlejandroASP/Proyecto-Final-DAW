@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { useTranslation } from 'react-i18next';
 
 function GameDetails() {
+  const { t } = useTranslation();
   const [game, setGame] = useState(null);
   const [rating, setRating] = useState(0);
   const [genreName, setGenreName] = useState("");
@@ -85,7 +87,7 @@ function GameDetails() {
         <div className="max-w-4xl w-full bg-black bg-opacity-45 mb-8 border border-white-500 border-4 shadow-md rounded-lg overflow-hidden">
           <div className="p-4">
             <Link to="/tienda" className="text-blue-500 hover:text-yellow-200">
-              Tienda
+              {t('store')}
             </Link>
             <span className="mx-2">{">"}</span>
             <span className="text-white">Detalles sobre {game.nombre}</span>
