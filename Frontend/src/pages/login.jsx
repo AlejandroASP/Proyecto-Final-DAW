@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import RecoverPassword from "../components/recoverPassword";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 
 function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [recoverPassword, setRecoverPassword] = useState(false);
   const [error, setError] = useState(null);
 
   const handleSubmit = (event) => {
@@ -47,7 +49,7 @@ function Login() {
       <Header />
       <div className="bg-gradient-to-b from-violet-900 to-pink-900">
         <div className="min-h-screen flex justify-center items-center">
-          <div className="bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full sm:max-w-md">
+          <div style={{display: !recoverPassword ? 'block' : 'none'}} className="bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded px-8 pt-6 pb-6 mb-4 w-full sm:max-w-md">
             <h2 className="text-center text-3xl font-extrabold text-white">
               Iniciar sesión
             </h2>
@@ -114,10 +116,21 @@ function Login() {
                   Regístrate
                 </Link>
               </p>
+              <p className="text-sm text-white mt-1">
+                ¿Olvidaste la contraseña?{" "}
+                <button className="text-sm font-medium text-indigo-600 hover:text-indigo-500 hover:underline" onClick={() => setRecoverPassword(!recoverPassword)}>
+                  Recuperar contraseña
+                </button>
+              </p>
             </div>
+          </div>
+          <div style={{display: recoverPassword ? 'block' : 'none'}} className="absolute  top-80 flex justify-center align-center">
+            <button className="text-white absolute top-80 right-2 pt-6 pr-1" onClick={() => setRecoverPassword(!recoverPassword)}>X</button>
+            <RecoverPassword/>
           </div>
         </div>
       </div>
+      
       <Footer />
     </>
   );
