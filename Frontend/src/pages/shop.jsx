@@ -105,7 +105,13 @@ function Tienda() {
       <Header />
       <div className="bg-gradient-to-b from-violet-900 to-pink-900 min-h-screen flex flex-col items-center">
         <div className="relative w-full max-w-md px-4 mt-8 mb-6">
+          <label htmlFor="search" className="absolute top-1 left-5">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#666666">
+              <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/>
+            </svg>
+          </label>
           <input
+            id="search"
             type="text"
             placeholder="Buscar juegos"
             value={busqueda}
@@ -165,13 +171,15 @@ function Tienda() {
             ))}
           </div>
         )}
-        <div className="flex justify-center mt-4 mb-8">
+        <div className="flex justify-center items-center mt-4 mb-8">
           <button
             onClick={irPaginaAnterior}
             disabled={paginaActual === 1}
-            className="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded"
+            className="mr-2 px-4 py-1 bg-indigo-900 bg-opacity-70 rounded"
           >
-            Anterior
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+              <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
+            </svg>
           </button>
           <span className="mx-2 text-white">
             Página {paginaActual} de {numeroTotalPaginas}
@@ -179,9 +187,11 @@ function Tienda() {
           <button
             onClick={irPaginaSiguiente}
             disabled={paginaActual === numeroTotalPaginas}
-            className="ml-2 px-4 py-2 bg-gray-300 text-gray-700 rounded"
+            className="ml-2 px-4 py-1 bg-indigo-900 bg-opacity-70 rounded"
           >
-            Siguiente
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+              <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/>
+            </svg>
           </button>
         </div>
       </div>
