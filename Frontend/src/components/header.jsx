@@ -80,15 +80,15 @@ const Header = () => {
         </nav>
         <div className="flex space-x-4">
           <button onClick={() => changeLanguage('es')} className="text-gray-300">
-            <FlagIcon className="h-6 w-6" />
+            🇪🇸
             <span className="sr-only">Español</span>
           </button>
           <button onClick={() => changeLanguage('fr')} className="text-gray-300">
-            <FlagIcon className="h-6 w-6" />
+            🇫🇷
             <span className="sr-only">Français</span>
           </button>
           <button onClick={() => changeLanguage('en')} className="text-gray-300">
-            <FlagIcon className="h-6 w-6" />
+            🇬🇧
             <span className="sr-only">English</span>
           </button>
         </div>

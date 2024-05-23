@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { useTranslation } from 'react-i18next';
 
 function User() {
+  const { t } = useTranslation();
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
@@ -62,7 +64,7 @@ function User() {
       <div className="bg-gradient-to-b from-violet-900 to-pink-900 p-3 min-h-screen flex items-center">
         <div className="container px-8 pt-6 pb-8 mx-auto flex flex-col bg-black bg-opacity-45 border border-white-500 border-4 rounded md:w-2/3">
           <h1 className="text-2xl text-3xl font-extrabold text-white mb-4">
-            Editar Perfil
+            {t('edit_profile')}
           </h1>
           <div className="flex flex-col md:flex-row md:items-center">
             {/* Imagen de perfil en la izquierda para escritorio y centrada para tablet y móvil */}
@@ -71,7 +73,7 @@ function User() {
                 htmlFor="profileImage"
                 className="block text-white mb-1"
               >
-                Imagen de Perfil
+                {t('profile_image')}
               </label>
               <div className="max-w-xs w-full">
                 {userData.profileImage && (
@@ -97,7 +99,7 @@ function User() {
                   htmlFor="firstName"
                   className="block text-white mb-2 "
                 >
-                  Nombre
+                  {t('name')}
                 </label>
                 <input
                   type="text"
@@ -113,7 +115,7 @@ function User() {
                   htmlFor="lastName"
                   className="block text-white mb-2"
                 >
-                  Apellido
+                  {t('sur_name')}
                 </label>
                 <input
                   type="text"
@@ -129,7 +131,7 @@ function User() {
                   htmlFor="email"
                   className="block text-white mb-2"
                 >
-                  Correo Electrónico
+                  {t('email')}
                 </label>
                 <input
                   type="email"
@@ -145,7 +147,7 @@ function User() {
                   htmlFor="password"
                   className="block text-white mb-2"
                 >
-                  Contraseña
+                  {t('password')}
                 </label>
                 <input
                   type="password"
@@ -161,7 +163,7 @@ function User() {
                   htmlFor="confirmPassword"
                   className="block text-white mb-2"
                 >
-                  Confirmar Contraseña
+                  {t('confirm_passw')}
                 </label>
                 <input
                   type="password"
@@ -176,7 +178,7 @@ function User() {
                 type="submit"
                 className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
               >
-                Guardar Cambios
+                {t('save_changes')}
               </button>
             </form>
           </div>

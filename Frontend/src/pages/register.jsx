@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid"; // Importa los iconos de ojo y ojo desactivado de Heroicons v2
+import { useTranslation } from 'react-i18next';
 
 function Register() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
@@ -74,7 +76,7 @@ function Register() {
         <div className="min-h-screen flex justify-center items-center">
           <div className="bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full sm:max-w-md">
             <h2 className="text-center text-3xl font-extrabold text-white">
-              Registrarse
+              {t('register')}
             </h2>
             {error && (
               <div className="text-red-600 text-center mb-4">{error}</div>
@@ -203,18 +205,18 @@ function Register() {
                   type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Registrarse
+                  {t('register')}
                 </button>
               </div>
             </form>
             <div className="text-center mt-3">
               <p className="text-sm text-white">
-                ¿Ya tienes una cuenta?{" "}
+                {t('got_an_acc')} {" "}
                 <Link
                   to="/login"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  Inicia sesión
+                  {t('login_2')}
                 </Link>
               </p>
             </div>

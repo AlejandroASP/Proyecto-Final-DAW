@@ -26,7 +26,7 @@ function GameDetails() {
         setGame(data);
 
         // Realizar una solicitud adicional para obtener el nombre del género
-        fetch(`http://localhost:3002/api/genre/${data.genre_id}`, {
+        fetch(`http://localhost:3002/api/genre/${data.genre_id}}`, { // Utilizamos el idioma actual de la aplicación
           method: "GET",
         })
           .then((response) => {
@@ -37,7 +37,24 @@ function GameDetails() {
           })
           .then((genreData) => {
             console.log("Datos del género:", genreData);
-            setGenreName(genreData.nombre);
+            let translatedGenreName;
+
+            // Obtener el nombre del género traducido según el idioma seleccionado
+            switch (t) {
+              case 'es':
+                translatedGenreName = translations_es[genreData.nombre];
+                break;
+              case 'en':
+                translatedGenreName = translations_en[genreData.nombre];
+                break;
+              case 'fr':
+                translatedGenreName = translations_fr[genreData.nombre];
+                break;
+              default:
+                translatedGenreName = genreData.nombre;
+            }
+
+            setGenreName(translatedGenreName || genreData.nombre);
           })
           .catch((error) => {
             console.error("Error fetching genre details:", error);
@@ -46,7 +63,7 @@ function GameDetails() {
       .catch((error) => {
         console.error("Error fetching game details:", error);
       });
-  }, [gameId]);
+  }, [gameId, t]);
 
   const handleRatingClick = (value) => {
     setRating(value === rating ? 0 : value);
@@ -116,8 +133,8 @@ function GameDetails() {
                 }}
               >
                 {sessionStorage.getItem("token")
-                  ? "Añadir al carro"
-                  : "Inicia sesión para comprar"}
+                  ? t('add_to_cart')
+                  : t('login_dummy')}
               </button>
             </div>
             <div className="md:w-2/3 p-4">
@@ -125,7 +142,7 @@ function GameDetails() {
                 <h2 className="text-2xl font-bold mb-2 text-orange-500">{game.nombre}</h2>
                 <div className="flex items-center mb-2">{stars}</div>
                 <p className="text-gray-600 mb-2 text-white">
-                  Género: <span className="text-yellow-400">{genreName ? genreName : "Desconocido"}</span>
+                  {t('genre')}: <span className="text-yellow-400">{genreName || t('unknown')}</span>
                 </p>
 
                 <p className="text-gray-600 mb-2 text-green-500">
@@ -141,7 +158,7 @@ function GameDetails() {
         <div className="max-w-4xl w-full mt-8 bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded-lg overflow-hidden">
           <div className="p-4">
             <h3 className="text-xl text-white font-bold mb-4">
-              Juegos de la misma categoría
+              {t('similar_games')}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {game.genre &&

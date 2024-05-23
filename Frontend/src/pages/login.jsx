@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
+import { useTranslation } from 'react-i18next';
 
 function Login() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
@@ -49,7 +51,7 @@ function Login() {
         <div className="min-h-screen flex justify-center items-center">
           <div className="bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full sm:max-w-md">
             <h2 className="text-center text-3xl font-extrabold text-white">
-              Iniciar sesión
+              {t("login")}
             </h2>
             {error && (
               <div className="text-red-600 text-center mb-4">{error}</div>
@@ -58,7 +60,7 @@ function Login() {
               <div className="space-y-4">
                 <div>
                   <label htmlFor="username" className="sr-only">
-                    Usuario
+                    {t('user')}
                   </label>
                   <input
                     id="username"
@@ -71,7 +73,7 @@ function Login() {
                 </div>
                 <div className="relative">
                   <label htmlFor="password" className="sr-only">
-                    Contraseña
+                    {t('password')}
                   </label>
                   <input
                     id="password"
@@ -100,18 +102,18 @@ function Login() {
                   type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Iniciar sesión
+                  {t("login")}
                 </button>
               </div>
             </form>
             <div className="text-center mt-3">
               <p className="text-sm text-white">
-                ¿No tienes una cuenta?{" "}
+                {t('account')} {" "}
                 <Link
                   to="/register"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  Regístrate
+                  {t('register_2')}
                 </Link>
               </p>
             </div>
