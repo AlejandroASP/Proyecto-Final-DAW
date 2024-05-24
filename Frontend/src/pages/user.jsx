@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { useTranslation } from 'react-i18next';
 
 function User() {
+  const { t } = useTranslation();
   const [userData, setUserData] = useState({
     username: "",
     firstName: "",
     lastName: "",
     email: "",
+    password: "",
+    confirmPassword: "",
     profileImage: null,
   });
+  const [fileName, setFileName] = useState('');
 
   useEffect(() => {
     // Lógica para obtener la información del perfil del usuario al cargar la página
@@ -57,6 +62,10 @@ function User() {
       ...userData,
       [name]: newValue,
     });
+
+    if (type === "file") {
+      setFileName(e.target.files[0].name);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -68,20 +77,20 @@ function User() {
     <>
       <Header />
       <div className="bg-gradient-to-b from-violet-900 to-pink-900 p-3 min-h-screen flex items-center">
-        <div className="container px-8 pt-6 pb-8 mx-auto flex flex-col bg-white rounded md:w-2/3">
-          <h1 className=" text-3xl font-extrabold text-gray-900 mb-4">
-            Ver Perfil
+        <div className="container px-8 pt-6 pb-8 mx-auto flex flex-col bg-black bg-opacity-45 border border-white-500 border-4 rounded md:w-2/3">
+          <h1 className="text-2xl text-3xl font-extrabold text-white mb-4">
+            {t('edit_profile')}
           </h1>
           <div className="flex flex-col md:flex-row md:items-center">
             {/* Imagen de perfil en la izquierda para escritorio y centrada para tablet y móvil */}
             <div className="mb-4 md:mr-8 md:w-1/3 flex justify-center md:justify-start flex-col items-center">
               <label
                 htmlFor="profileImage"
-                className="block text-gray-700 font-bold"
+                className="block text-white mb-1 "
               >
-                Imagen de Perfil
+                {t('profile_image')}
               </label>
-              <div className="max-w-xs w-full">
+              <div className="max-w-xs w-full relative">
                 {userData.profileImage && (
                   <img
                     src={userData.profileImage}
@@ -94,9 +103,12 @@ function User() {
                   id="profileImage"
                   name="profileImage"
                   onChange={handleChange}
-                  className="border rounded w-full py-2 px-3"
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer "
                   accept="image/*"
                 />
+                <span className="block w-full py-2 px-3 rounded bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-center cursor-pointer ">
+                  {fileName || t('select_image')}
+                </span>
               </div>
             </div>
             <form onSubmit={handleSubmit} className="w-full md:w-2/3">
@@ -120,9 +132,9 @@ function User() {
               <div className="mb-4">
                 <label
                   htmlFor="firstName"
-                  className="block text-gray-700 font-bold mb-2 "
+                  className="block text-white mb-2 "
                 >
-                  Nombre
+                  {t('name')}
                 </label>
                 <input
                   type="text"
@@ -137,9 +149,9 @@ function User() {
               <div className="mb-4">
                 <label
                   htmlFor="lastName"
-                  className="block text-gray-700 font-bold mb-2"
+                  className="block text-white mb-2"
                 >
-                  Apellido
+                  {t('sur_name')}
                 </label>
                 <input
                   type="text"
@@ -154,9 +166,9 @@ function User() {
               <div className="mb-4">
                 <label
                   htmlFor="email"
-                  className="block text-gray-700 font-bold mb-2"
+                  className="block text-white mb-2"
                 >
-                  Correo Electrónico
+                  {t('email')}
                 </label>
                 <input
                   type="email"
@@ -168,11 +180,43 @@ function User() {
                   disabled
                 />
               </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="password"
+                  className="block text-white mb-2"
+                >
+                  {t('password')}
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={userData.password}
+                  onChange={handleChange}
+                  className="border rounded w-full py-2 px-3"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-white mb-2"
+                >
+                  {t('confirm_passw')}
+                </label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={userData.confirmPassword}
+                  onChange={handleChange}
+                  className="border rounded w-full py-2 px-3"
+                />
+              </div>
               <button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
               >
-                Modificar Informacíon
+                {t('save_changes')}
               </button>
             </form>
           </div>

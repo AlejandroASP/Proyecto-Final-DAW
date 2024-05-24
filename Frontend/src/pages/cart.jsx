@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import ProductoBeta from "../assets/productoBeta.jpg";
+import { useTranslation } from 'react-i18next';
 
 // Componente Product
 const Product = ({ id, name, price, addToCart }) => (
@@ -60,7 +61,7 @@ const CartItem = ({ id, name, price, removeFromCart }) => (
         className="bg-red-500 hover:bg-red-700 text-white font-bold mt-3 py-2 px-4 rounded"
         onClick={() => removeFromCart(id)}
       >
-        Eliminar
+        {t('remove')}
       </button>
     </div>
   </div>
@@ -70,11 +71,11 @@ const CartItem = ({ id, name, price, removeFromCart }) => (
 const Cart = ({ cart, removeFromCart, clearCart, completePurchase }) => (
   <div className="bg-black bg-opacity-45 p-4 mb-4 md:w-2/6 rounded-xl border border-white-500 border-4 mt-4 md:mt-0">
     <h1 className="text-white text-2xl font-extrabold mb-4">
-      Carrito de Compras
+      
     </h1>
     {cart.length === 0 ? (
       <div>
-        <p className="text-white">El carrito está vacío</p>
+        <p className="text-white">"El carrito está vacío"</p>
         {/* <button className="bg-gray-300 text-gray-600 py-2 px-4 font-bold rounded cursor-not-allowed" disabled>Comprar</button> */}
       </div>
     ) : (
@@ -91,7 +92,7 @@ const Cart = ({ cart, removeFromCart, clearCart, completePurchase }) => (
           className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
           onClick={clearCart}
         >
-          Vaciar Carrito
+          {t('clear_cart')}
         </button>
         <button
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
@@ -106,6 +107,7 @@ const Cart = ({ cart, removeFromCart, clearCart, completePurchase }) => (
 
 // Componente principal
 function CartPage() {
+  const { t } = useTranslation();
   const [cart, setCart] = useState([]);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
 
@@ -134,12 +136,12 @@ function CartPage() {
       <Header />
       <div className="bg-gradient-to-b from-violet-900 to-pink-900">
         <div className="container mx-auto p-5">
-          <h1 className="text-white text-3xl font-extrabold mb-4">Carrito</h1>
+          <h1 className="text-white text-3xl font-extrabold mb-4">{t('cart')}</h1>
           <div className="flex flex-col md:flex-row justify-between">
             <div className="md:w-4/5 bg-black bg-opacity-45 md:mr-7 rounded-xl border border-white-500 border-4 pb-4">
               <div className="h-15">
                 <h1 className="text-white text-2xl font-extrabold m-4">
-                  Productos seleccionados
+                  {t('selected_products')}
                 </h1>
               </div>
               <div className="overflow-auto h-96">
@@ -189,7 +191,7 @@ function CartPage() {
             </div>
             {purchaseSuccess ? (
               <p className="bg-black bg-opacity-45 md:w-2/6 rounded-xl mt-4 border border-white-500 border-4 text-white text-center p-4">
-                Compra realizada con éxito
+                {t("succesful_purchase")}
               </p>
             ) : (
               <Cart
@@ -202,7 +204,7 @@ function CartPage() {
           </div>
           <div className="bg-black bg-opacity-45 mt-7 rounded-xl border border-white-500 border-4 pb-4">
             <h1 className="text-white text-2xl font-extrabold m-4">
-              Productos Relacionados
+              {t('related_products')}
             </h1>
             <div className="grid grid-cols-1 gap-1 md:grid-cols-3 overflow-auto md:overflow-none h-96 md:h-40">
               <RecommendProduct

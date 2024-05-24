@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import logo from '../assets/logo.png';
+import spain from '../assets/españa.png';
+import french from '../assets/francia.png';
+import united_kingdom from '../assets/reino_unido.png';
 import '../App.css';
+import { FlagIcon } from '@heroicons/react/outline';
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false); // Inicializamos el menú cerrado
+  const { t, i18n } = useTranslation();
+  const [menuOpen, setMenuOpen] = useState(false);
   const [username, setUsername] = useState(null);
   const navigate = useNavigate();
 
@@ -17,6 +23,10 @@ const Header = () => {
     sessionStorage.removeItem('username');
     setUsername(null);
     navigate('/');
+  };
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
   };
 
   useEffect(() => {
@@ -37,42 +47,56 @@ const Header = () => {
         <nav className="hidden md:flex flex-grow justify-center">
           <ul className="flex items-center space-x-6">
             <li>
-              <Link to={'/tienda'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">Tienda</Link>
+              <Link to={'/tienda'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('store')}</Link>
             </li>
             {username && (
               <>
-              <li>
-                <Link to={'/cart'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">Carrito</Link>
-              </li>
-              <li>
-                  <Link to={'/user'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">Perfil</Link>
+                <li>
+                  <Link to={'/cart'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('cart')}</Link>
                 </li>
+                <li>
+                  <Link to={'/user'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('profile')}</Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
+        <div className="flex items-center justify-between md:justify-end space-x-4 md:ml-auto">
+          {/* Menú de navegación */}
+          <nav className="hidden md:flex">
+            <ul className="flex items-center space-x-6">
+              {!username ? (
+                <>
+                  <li>
+                    <Link to={'/login'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('login')}</Link>
+                  </li>
+                  <li>
+                    <Link to={'/register'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('register')}</Link>
+                  </li>
                 </>
-            )}
-          </ul>
-        </nav>
-        <nav className="hidden md:flex">
-          <ul className="flex items-center space-x-6">
-            {!username ? (
-              <>
+              ) : (
                 <li>
-                  <Link to={'/login'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">Iniciar Sesión</Link>
+                  <button onClick={handleLogout} className="text-gray-300 hover:text-red-600 transition duration-300 text-2xl ">{t('logout')}</button>
                 </li>
-                <li>
-                  <Link to={'/register'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">Registrarse</Link>
-                </li>
-              </>
-            ) : (
-              <>
-                
-                <li>
-                  <button onClick={handleLogout} className="text-gray-300 hover:text-red-600 transition duration-300 text-2xl">Cerrar Sesión</button>
-                </li>
-              </>
-            )}
-          </ul>
-        </nav>
-        {/* Botón de hamburguesa para dispositivos móviles */}
+              )}
+            </ul>
+          </nav>
+          {/* Botones de cambio de idioma */}
+          <div className="flex items-center space-x-4">
+            <button onClick={() => changeLanguage('es')} className="text-gray-300">
+              <img src={spain} alt="Spanish Flag" className="h-6 w-auto" />
+              <span className="sr-only">Español</span>
+            </button>
+            <button onClick={() => changeLanguage('fr')} className="text-gray-300">
+              <img src={french} alt="French Flag" className="h-6 w-auto" />
+              <span className="sr-only">Français</span>
+            </button>
+            <button onClick={() => changeLanguage('en')} className="text-gray-300">
+              <img src={united_kingdom} alt="English Flag" className="h-6 w-auto" />
+              <span className="sr-only">English</span>
+            </button>
+          </div>
+        </div>
         <div className="md:hidden">
           <button onClick={toggleMenu} className="text-gray-300 hover:text-white transition duration-300 focus:outline-none">
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -81,34 +105,33 @@ const Header = () => {
           </button>
         </div>
       </div>
-      {/* Menú desplegable para dispositivos móviles */}
       {menuOpen && (
         <nav className="md:hidden bg-gray-900 py-2 px-4">
           <ul className="flex flex-col items-center space-y-4">
             <li>
-              <Link to={'/tienda'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>Tienda</Link>
+              <Link to={'/tienda'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>{t('store')}</Link>
             </li>
             {username && (
               <li>
-                <Link to={'/cart'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>Carrito</Link>
+                <Link to={'/cart'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>{t('cart')}</Link>
               </li>
             )}
             {!username ? (
               <>
                 <li>
-                  <Link to={'/login'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>Iniciar Sesión</Link>
+                  <Link to={'/login'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>{t('login')}</Link>
                 </li>
                 <li>
-                  <Link to={'/register'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>Registrarse</Link>
+                  <Link to={'/register'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>{t('register')}</Link>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                  <Link to={'/user'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>Perfil</Link>
+                  <Link to={'/user'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>{t('profile')}</Link>
                 </li>
                 <li>
-                  <button onClick={handleLogout} className="text-gray-300 hover:text-red-600 transition duration-300 text-2xl">Cerrar Sesión</button>
+                  <button onClick={handleLogout} className="text-gray-300 hover:text-red-600 transition duration-300 text-2xl">{t('logout')}</button>
                 </li>
               </>
             )}
@@ -116,7 +139,7 @@ const Header = () => {
         </nav>
       )}
       {username && (
-        <h1 className="text-gray-300 text-2xl text-center">¡Bienvenido de nuevo al Vórtice, {username}!</h1>
+        <h1 className="text-gray-300 text-2xl text-center">{t('welcome', { username })}</h1>
       )}
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 225">
         <path

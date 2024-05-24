@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from './pages/login';
 import Index from './pages/index';
 import Register from './pages/register';
-
 import Shop from './pages/shop';
 import GameDetails from './pages/gameDetails';
 import Cart from './pages/cart';
@@ -17,7 +16,6 @@ export function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/' element={<Index />} />
           <Route path='/register' element={<Register />} />
-
           <Route path='/tienda' element={<Shop />} />
           <Route path='/details/:gameId' element={<GameDetails />} />
           <Route path='/cart' element={<Cart />} />

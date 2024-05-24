@@ -25,8 +25,16 @@ function Index() {
                         <img key={index} src={image} alt={`Slide ${index}`} className="w-full md:w-auto h-auto md:h-auto" />
                     ))}
                 </div>
-                <button className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-900 text-white px-3 py-1 rounded-full" onClick={prevSlide}>Anterior</button>
-                <button className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-900 text-white px-3 py-1 rounded-full" onClick={nextSlide}>Siguiente</button>
+                <button className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gradient-to-r from-black to-transparent bg-opacity-35 h-full text-white px-3 py-1" onClick={prevSlide}>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#FFFFFF">
+                        <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/>
+                    </svg>
+                </button>
+                <button className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gradient-to-l from-black to-transparent bg-opacity-35  h-full text-white px-3 py-1" onClick={nextSlide}>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#FFFFFF">
+                        <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
+                    </svg>
+                </button>
             </div>
         </div>
     );
