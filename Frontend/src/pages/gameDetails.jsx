@@ -9,7 +9,9 @@ function GameDetails() {
   const [game, setGame] = useState(null);
   const [rating, setRating] = useState(0);
   const [genreName, setGenreName] = useState("");
+  const [relatedGames, setRelatedGames] = useState("");
   const { gameId } = useParams();
+  const [hoverIndex, setHoverIndex] = useState(null);
 
   useEffect(() => {
     fetch(`http://localhost:3002/api/game/${gameId}`, {
@@ -23,9 +25,9 @@ function GameDetails() {
       })
       .then((data) => {
         console.log("Datos del juego:", data);
-        setGame(data);
+        const gameData = { ...data };
 
-        // Realizar una solicitud adicional para obtener el nombre del género
+        // Realizar una solicitud adicional para obtener el género del juego
         fetch(`http://localhost:3002/api/genre/${data.genre_id}`, {
           method: "GET",
         })
@@ -49,6 +51,12 @@ function GameDetails() {
             console.log("translatedGenreName:", translatedGenreName);
 
             setGenreName(translatedGenreName);
+
+            // Agregar los juegos relacionados al objeto del juego
+            gameData.relatedGames = genreData.games;
+
+            // Establecer el estado del juego con los datos actualizados
+            setGame(gameData);
           })
           .catch((error) => {
             console.error("Error fetching genre details:", error);
@@ -57,6 +65,24 @@ function GameDetails() {
       })
       .catch((error) => {
         console.error("Error fetching game details:", error);
+      });
+
+    // Obtener los juegos del mismo género
+    fetch(`http://localhost:3002/api/game/related/${gameId}`, {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((relatedGamesData) => {
+        console.log("Juegos del mismo género:", relatedGamesData);
+        setRelatedGames(relatedGamesData);
+      })
+      .catch((error) => {
+        console.error("Error fetching related games:", error);
       });
   }, [gameId, t]);
 
@@ -102,15 +128,20 @@ function GameDetails() {
               {t('store')}
             </Link>
             <span className="mx-2">{">"}</span>
-            <span className="text-white">Detalles sobre {game.nombre}</span>
+            <span className="text-white">{t('details')} {game.nombre}</span>
           </div>
           <div className="flex flex-col md:flex-row">
             <div className="md:w-2/4 p-4 flex flex-col justify-between">
-              <img
-                src={game.img}
-                alt={game.nombre}
-                className="w-full h-auto mb-2"
-              />
+              <div
+                className="bg-blue-200 p-40 rounded-md shadow-md relative overflow-hidden flex flex-col items-center transition-colors duration-300 h-48 w-full bg-cover bg-center"
+                style={{ backgroundImage: `url(${game.img})` }}
+              >
+                <img
+                  src={game.img}
+                  alt={game.nombre}
+                  className="absolute inset-0 w-full h-full object-cover opacity-0"
+                />
+              </div>
               <button
                 className={`font-bold py-2 px-4 rounded ${!sessionStorage.getItem("token")
                   ? "bg-yellow-500 hover:bg-yellow-700"
@@ -132,6 +163,7 @@ function GameDetails() {
                   : t('login_dummy')}
               </button>
             </div>
+
             <div className="md:w-2/3 p-4">
               <div>
                 <h2 className="text-2xl font-bold mb-2 text-orange-500">{game.nombre}</h2>
@@ -139,9 +171,9 @@ function GameDetails() {
                 <p className="text-gray-600 mb-2 text-white">
                   {t('genre')}: <span className="text-yellow-400">{genreName || t('unknown')}</span>
                 </p>
-                
+
                 <p className="text-gray-600 mb-2 text-white">
-                  Precio: <span className="text-green-500">{game.precio} €</span>
+                  {t('price')} <span className="text-green-500">{game.precio} €</span>
                 </p>
               </div>
               <div className="mt-4">
@@ -150,38 +182,37 @@ function GameDetails() {
             </div>
           </div>
         </div>
-        <div className="max-w-4xl w-full mt-8 bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded-lg overflow-hidden">
+        <div className="max-w-8xl w-full mt-8 bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded-lg overflow-hidden">
           <div className="p-4">
-            <h3 className="text-xl text-white font-bold mb-4">
+            <h3 className="text-xl text-white font-bold mb-4 flex justify-center">
               {t('similar_games')}
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {game.genre &&
-                game.genre.games &&
-                game.genre.games.map((otherGame, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-lg shadow-md overflow-hidden"
-                  >
-                    <Link to={`/details/${otherGame.id}`}>
-                      <img
-                        src={otherGame.img}
-                        alt={otherGame.nombre}
-                        className="w-full h-auto"
-                      />
-                      <div className="p-4">
-                        <h4 className="text-lg font-bold">
-                          {otherGame.nombre}
-                        </h4>
-                        <p className="text-gray-600">{otherGame.precio} €</p>
-                      </div>
-                    </Link>
-                  </div>
-                ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-5 mx-3">
+              {relatedGames && relatedGames.map((otherGame, index) => (
+                <div
+                  key={index}
+                  className={`bg-blue-200 p-40 rounded-md shadow-md relative overflow-hidden flex flex-col items-center transition-colors duration-300 h-48 w-full bg-cover bg-center
+                  ${hoverIndex === index ? "bg-opacity-80" : "bg-opacity-100"}`}
+                  style={{ backgroundImage: `url(${otherGame.img})` }}
+                  onMouseEnter={() => setHoverIndex(index)}
+                  onMouseLeave={() => setHoverIndex(null)}
+                >
+                  {hoverIndex === index && (
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                      <h3 className="text-lg font-bold text-white">{otherGame.nombre}</h3>
+                      <Link
+                        to={`/details/${otherGame.id}`}
+                        className="absolute inset-0 flex justify-center items-center"
+                      ></Link>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </div>
+
+      </div >
       <Footer />
     </>
   );

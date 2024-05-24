@@ -54,10 +54,12 @@
     "got_an_acc": "Tu as déjà un compte?",
     "login_2": "Connectez-vous",
     "username": "Nom d'utilisateur",
+    "details": "Détails sur",
     "genres": {
         "accion": "D'action",
         "shooter": "Tir",
         "plataformas": "Plateforme",
         "survival": "Survie"
-    }
+    },
+    "price": "Prix:"
 }

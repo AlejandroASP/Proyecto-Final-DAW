@@ -140,22 +140,39 @@ router.get("/:gameId", async (req, res) => {
             return res.status(404).json({ error: "Juego no encontrado" });
         }
 
-        // Obtener el género del juego actual
-        const genreId = game.genre.id;
-
-        // Obtener los juegos del mismo género
-        const relatedGames = await Game.findAll({
-            where: { genre_id: genreId, id: { [Op.ne]: gameId } },
-            attributes: ['id', 'nombre', 'img', 'precio'],
-        });
-
-        res.json({ game, relatedGames });
+        res.json({ game });
     } catch (error) {
         console.error("Error al obtener los detalles del juego:", error);
         res.status(500).json({ error: "Error interno del servidor" });
     }
 });
 
+// Metodo para obtener los juegos del mismo genero
+router.get("/related/:gameId", async (req, res) => {
+    try {
+        const { gameId } = req.params;
 
+        // Obtener el juego específico
+        const game = await Game.findByPk(gameId);
+
+        if (!game) {
+            return res.status(404).json({ error: "Juego no encontrado" });
+        }
+
+        // Obtener el género del juego actual
+        const genreId = game.genre_id;
+
+        // Obtener los juegos del mismo género (excluyendo el juego actual)
+        const relatedGames = await Game.findAll({
+            where: { genre_id: genreId, id: { [Op.ne]: gameId } },
+            attributes: ['id', 'nombre', 'img', 'precio'],
+        });
+
+        res.json(relatedGames);
+    } catch (error) {
+        console.error("Error al obtener juegos del mismo género:", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
 
 export default router;

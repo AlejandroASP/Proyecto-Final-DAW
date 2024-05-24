@@ -32,7 +32,7 @@
     "genre": "Genre",
     "unknown": "Unknown",
     "similar_games": "Games of the same category",
-    "login_dummy": "Inicia sesión para comprar",
+    "login_dummy": "Log in to buy",
     "add_to_cart": "Add to cart",
     "edit_profile": "Edit Profile",
     "profile_image": "Edit Profile Image",
@@ -55,10 +55,12 @@
     "got_an_acc":"Already have an account?",
     "login_2": "Sign in",
     "username": "Username",
+    "details": "Details about",
     "genres": {
         "accion": "Action",
         "shooter": "Shooter",
         "plataformas": "Platforms",
         "survival": "Survival"
-    }
+    },
+    "price": "Price:"
 }
