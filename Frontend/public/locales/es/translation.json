@@ -54,10 +54,12 @@
     "got_an_acc": "¿Ya tienes una cuenta?",
     "login_2": "Inicia sesión",
     "username": "Nombre de usuario",
+    "details": "Detalles sobre",
     "genres": {
         "accion": "Acción",
         "shooter": "Disparos",
         "plataformas": "Plataformas",
         "survival": "Supervivencia"
-    }
+    },
+    "price": "Precio:"
 }
