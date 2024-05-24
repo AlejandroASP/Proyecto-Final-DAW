@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 function User() {
   const { t } = useTranslation();
   const [userData, setUserData] = useState({
+    username: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -37,6 +38,15 @@ function User() {
 
       const userData = await response.json();
       console.log("Información del usuario:", userData);
+
+      // Actualizar el estado con los datos del usuario obtenidos
+      setUserData({
+        username: userData.usuario,
+        firstName: userData.nombre,
+        lastName: userData.apellido,
+        email: userData.email,
+        profileImage: userData.img,
+      });
     } catch (error) {
       console.error(
         "Error al obtener la información del perfil del usuario:",
@@ -73,7 +83,7 @@ function User() {
           </h1>
           <div className="flex flex-col md:flex-row md:items-center">
             {/* Imagen de perfil en la izquierda para escritorio y centrada para tablet y móvil */}
-            <div className="mb-4 md:mr-8 md:w-1/3 flex justify-center md:justify-start flex flex-col items-center">
+            <div className="mb-4 md:mr-8 md:w-1/3 flex justify-center md:justify-start flex-col items-center">
               <label
                 htmlFor="profileImage"
                 className="block text-white mb-1 "
@@ -83,7 +93,7 @@ function User() {
               <div className="max-w-xs w-full relative">
                 {userData.profileImage && (
                   <img
-                    src={URL.createObjectURL(userData.profileImage)}
+                    src={userData.profileImage}
                     alt="Profile"
                     className="my-4 w-full md:w-auto rounded-full"
                   />
@@ -104,6 +114,23 @@ function User() {
             <form onSubmit={handleSubmit} className="w-full md:w-2/3">
               <div className="mb-4">
                 <label
+                  htmlFor="username"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Nombre de Usuario
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={userData.username}
+                  onChange={handleChange}
+                  className="border rounded w-full py-2 px-3"
+                  disabled
+                />
+              </div>
+              <div className="mb-4">
+                <label
                   htmlFor="firstName"
                   className="block text-white mb-2 "
                 >
@@ -116,6 +143,7 @@ function User() {
                   value={userData.firstName}
                   onChange={handleChange}
                   className="border rounded w-full py-2 px-3"
+                  disabled
                 />
               </div>
               <div className="mb-4">
@@ -132,6 +160,7 @@ function User() {
                   value={userData.lastName}
                   onChange={handleChange}
                   className="border rounded w-full py-2 px-3"
+                  disabled
                 />
               </div>
               <div className="mb-4">
@@ -148,6 +177,7 @@ function User() {
                   value={userData.email}
                   onChange={handleChange}
                   className="border rounded w-full py-2 px-3"
+                  disabled
                 />
               </div>
               <div className="mb-4">
