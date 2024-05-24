@@ -139,7 +139,7 @@ const Header = () => {
         </nav>
       )}
       {username && (
-        <h1 className="text-gray-300 text-2xl text-center">{t('welcome', { username })}</h1>
+        <h1 className="text-gray-300 text-2xl flex justify-center">{t('welcome', { username })}</h1>
       )}
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 225">
         <path
