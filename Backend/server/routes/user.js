@@ -38,32 +38,39 @@ router.post("/login", async (req, res) => {
   res.json({ token });
 });
 
-// Obtener información del usuario
-router.get("/profile", async (req, res) => {
-  const { username } = req.query;
+// Middleware para verificar el token JWT
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
 
-  if (username === undefined) {
-    logger.error("Usuario indefinido");
-    res.json({ error: "Usuario incorrecto" });
-    return;
+  if (token == null) {
+    return res.sendStatus(401); // Si no hay token, se deniega el acceso
   }
 
-  const user = await User.findOne({
-    where: {
-      usuario: username,
-    },
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.sendStatus(403); // Token no válido
+    }
+    req.user = user;
+    next();
   });
+};
+
+// Obtener información del usuario
+router.get("/profile", authenticateToken, async (req, res) => {
+  const { id } = req.user;
+
+  const user = await User.findByPk(id);
 
   if (!user) {
     logger.error("Usuario no encontrado");
-    res.json({ error: "Usuario no encontrado" });
-    return;
+    return res.status(404).json({ error: "Usuario no encontrado" });
   }
 
   // No devuelvas la contraseña en la respuesta
   const { contraseña, ...userWithoutPassword } = user.dataValues;
 
-  logger.info(`Información del usuario ${username} obtenida`);
+  logger.info(`Información del usuario ${user.usuario} obtenida`);
   res.json(userWithoutPassword);
 });
 
