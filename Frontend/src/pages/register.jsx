@@ -85,7 +85,7 @@ function Register() {
               <div className="space-y-4">
                 <div>
                   <label htmlFor="username" className="sr-only">
-                    Nombre de usuario
+                    {t('username')}
                   </label>
                   <input
                     id="username"
@@ -93,12 +93,12 @@ function Register() {
                     type="text"
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Nombre de usuario"
+                    placeholder={t('username')}
                   />
                 </div>
                 <div>
                   <label htmlFor="firstName" className="sr-only">
-                    Nombre
+                    {t('name')}
                   </label>
                   <input
                     id="firstName"
@@ -106,12 +106,12 @@ function Register() {
                     type="text"
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Nombre"
+                    placeholder={t('name')}
                   />
                 </div>
                 <div>
                   <label htmlFor="lastName" className="sr-only">
-                    Apellidos
+                    {t('sur_name')}
                   </label>
                   <input
                     id="lastName"
@@ -119,12 +119,12 @@ function Register() {
                     type="text"
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Apellidos"
+                    placeholder={t('sur_name')}
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="sr-only">
-                    Correo electrónico
+                    {t('email')}
                   </label>
                   <input
                     id="email"
@@ -132,12 +132,12 @@ function Register() {
                     type="email"
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Correo electrónico"
+                    placeholder={t('email')}
                   />
                 </div>
                 <div>
                   <label htmlFor="confirmEmail" className="sr-only">
-                    Confirmar correo electrónico
+                    {t('confirm_email')}
                   </label>
                   <input
                     id="confirmEmail"
@@ -145,12 +145,12 @@ function Register() {
                     type="email"
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Confirmar correo electrónico"
+                    placeholder={t('confirm_email')}
                   />
                 </div>
                 <div className="relative">
                   <label htmlFor="password" className="sr-only">
-                    Contraseña
+                    {t('password')}
                   </label>
                   <input
                     id="password"
@@ -158,7 +158,7 @@ function Register() {
                     type={showPassword ? "text" : "password"}
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Contraseña"
+                    placeholder={t('password')}
                   />
                   {/* Botón de ojo para mostrar/ocultar la contraseña */}
                   <button
@@ -175,7 +175,7 @@ function Register() {
                 </div>
                 <div className="relative">
                   <label htmlFor="confirmPassword" className="sr-only">
-                    Confirmar contraseña
+                    {t('confirm_passw')}
                   </label>
                   <input
                     id="confirmPassword"
@@ -183,7 +183,7 @@ function Register() {
                     type={showConfirmPassword ? "text" : "password"}
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Confirmar contraseña"
+                    placeholder={t('confirm_passw')}
                   />
                   {/* Botón de ojo para mostrar/ocultar la contraseña repetida */}
                   <button

@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/logo.png';
+import spain from '../assets/españa.png';
+import french from '../assets/francia.png';
+import united_kingdom from '../assets/reino_unido.png';
 import '../App.css';
 import { FlagIcon } from '@heroicons/react/outline';
 
@@ -58,39 +61,41 @@ const Header = () => {
             )}
           </ul>
         </nav>
-        <nav className="hidden md:flex">
-          <ul className="flex items-center space-x-6">
-            {!username ? (
-              <>
+        <div className="flex items-center justify-between md:justify-end space-x-4 md:ml-auto">
+          {/* Menú de navegación */}
+          <nav className="hidden md:flex">
+            <ul className="flex items-center space-x-6">
+              {!username ? (
+                <>
+                  <li>
+                    <Link to={'/login'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('login')}</Link>
+                  </li>
+                  <li>
+                    <Link to={'/register'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('register')}</Link>
+                  </li>
+                </>
+              ) : (
                 <li>
-                  <Link to={'/login'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('login')}</Link>
+                  <button onClick={handleLogout} className="text-gray-300 hover:text-red-600 transition duration-300 text-2xl ">{t('logout')}</button>
                 </li>
-                <li>
-                  <Link to={'/register'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('register')}</Link>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <button onClick={handleLogout} className="text-gray-300 hover:text-red-600 transition duration-300 text-2xl">{t('logout')}</button>
-                </li>
-              </>
-            )}
-          </ul>
-        </nav>
-        <div className="flex space-x-4">
-          <button onClick={() => changeLanguage('es')} className="text-gray-300">
-            🇪🇸
-            <span className="sr-only">Español</span>
-          </button>
-          <button onClick={() => changeLanguage('fr')} className="text-gray-300">
-            🇫🇷
-            <span className="sr-only">Français</span>
-          </button>
-          <button onClick={() => changeLanguage('en')} className="text-gray-300">
-            🇬🇧
-            <span className="sr-only">English</span>
-          </button>
+              )}
+            </ul>
+          </nav>
+          {/* Botones de cambio de idioma */}
+          <div className="flex items-center space-x-4">
+            <button onClick={() => changeLanguage('es')} className="text-gray-300">
+              <img src={spain} alt="Spanish Flag" className="h-6 w-auto" />
+              <span className="sr-only">Español</span>
+            </button>
+            <button onClick={() => changeLanguage('fr')} className="text-gray-300">
+              <img src={french} alt="French Flag" className="h-6 w-auto" />
+              <span className="sr-only">Français</span>
+            </button>
+            <button onClick={() => changeLanguage('en')} className="text-gray-300">
+              <img src={united_kingdom} alt="English Flag" className="h-6 w-auto" />
+              <span className="sr-only">English</span>
+            </button>
+          </div>
         </div>
         <div className="md:hidden">
           <button onClick={toggleMenu} className="text-gray-300 hover:text-white transition duration-300 focus:outline-none">

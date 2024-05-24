@@ -11,8 +11,9 @@ function User() {
     email: "",
     password: "",
     confirmPassword: "",
-    profileImage: "",
+    profileImage: null,
   });
+  const [fileName, setFileName] = useState('');
 
   useEffect(() => {
     // Lógica para obtener la información del perfil del usuario al cargar la página
@@ -51,6 +52,10 @@ function User() {
       ...userData,
       [name]: newValue,
     });
+
+    if (type === "file") {
+      setFileName(e.target.files[0].name);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -71,11 +76,11 @@ function User() {
             <div className="mb-4 md:mr-8 md:w-1/3 flex justify-center md:justify-start flex flex-col items-center">
               <label
                 htmlFor="profileImage"
-                className="block text-white mb-1"
+                className="block text-white mb-1 "
               >
                 {t('profile_image')}
               </label>
-              <div className="max-w-xs w-full">
+              <div className="max-w-xs w-full relative">
                 {userData.profileImage && (
                   <img
                     src={URL.createObjectURL(userData.profileImage)}
@@ -88,9 +93,12 @@ function User() {
                   id="profileImage"
                   name="profileImage"
                   onChange={handleChange}
-                  className="border rounded w-full py-2 px-3"
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer "
                   accept="image/*"
                 />
+                <span className="block w-full py-2 px-3 rounded bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-center cursor-pointer ">
+                  {fileName || t('select_image')}
+                </span>
               </div>
             </div>
             <form onSubmit={handleSubmit} className="w-full md:w-2/3">

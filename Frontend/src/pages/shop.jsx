@@ -43,10 +43,21 @@ function Tienda() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Genres fetched:", data);
-        setGenres(data);
+
+        // Mapear los géneros para traducir sus nombres
+        const translatedGenres = data.map(genre => {
+          const genreKey = genre.nombre.toLowerCase().replace(/[^a-z0-9]+/g, '');
+          return {
+            ...genre,
+            nombre: t(`genres.${genreKey}`, {
+              defaultValue: genre.nombre // Valor por defecto si no se encuentra la traducción
+            })
+          };
+        });
+        setGenres(translatedGenres);
       })
       .catch((error) => console.error("Error fetching genres:", error));
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     const genreQuery = selectedGenre ? `?genre_id=${selectedGenre}` : "";

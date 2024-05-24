@@ -26,7 +26,7 @@ function GameDetails() {
         setGame(data);
 
         // Realizar una solicitud adicional para obtener el nombre del género
-        fetch(`http://localhost:3002/api/genre/${data.genre_id}}`, { // Utilizamos el idioma actual de la aplicación
+        fetch(`http://localhost:3002/api/genre/${data.genre_id}`, {
           method: "GET",
         })
           .then((response) => {
@@ -37,27 +37,22 @@ function GameDetails() {
           })
           .then((genreData) => {
             console.log("Datos del género:", genreData);
-            let translatedGenreName;
 
-            // Obtener el nombre del género traducido según el idioma seleccionado
-            switch (t) {
-              case 'es':
-                translatedGenreName = translations_es[genreData.nombre];
-                break;
-              case 'en':
-                translatedGenreName = translations_en[genreData.nombre];
-                break;
-              case 'fr':
-                translatedGenreName = translations_fr[genreData.nombre];
-                break;
-              default:
-                translatedGenreName = genreData.nombre;
-            }
+            // Normalizar la clave del género
+            const genreKey = genreData.nombre.toLowerCase().replace(/[^a-z0-9]+/g, '');
 
-            setGenreName(translatedGenreName || genreData.nombre);
+            // Obtener el nombre del género traducido usando `t`
+            const translatedGenreName = t(`genres.${genreKey}`, {
+              defaultValue: genreData.nombre // Valor por defecto si no se encuentra la traducción
+            });
+
+            console.log("translatedGenreName:", translatedGenreName);
+
+            setGenreName(translatedGenreName);
           })
           .catch((error) => {
             console.error("Error fetching genre details:", error);
+            setGenreName(t('unknown'));
           });
       })
       .catch((error) => {
@@ -144,9 +139,9 @@ function GameDetails() {
                 <p className="text-gray-600 mb-2 text-white">
                   {t('genre')}: <span className="text-yellow-400">{genreName || t('unknown')}</span>
                 </p>
-
-                <p className="text-gray-600 mb-2 text-green-500">
-                  Precio: {game.precio} €
+                
+                <p className="text-gray-600 mb-2 text-white">
+                  Precio: <span className="text-green-500">{game.precio} €</span>
                 </p>
               </div>
               <div className="mt-4">
