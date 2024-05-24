@@ -10,14 +10,12 @@ function User() {
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
-    confirmPassword: "",
     profileImage: null,
   });
   const [fileName, setFileName] = useState('');
+  const [isEditing, setIsEditing] = useState(false); 
 
   useEffect(() => {
-    // Lógica para obtener la información del perfil del usuario al cargar la página
     fetchUserProfile();
   }, []);
 
@@ -39,8 +37,8 @@ function User() {
       const userData = await response.json();
       console.log("Información del usuario:", userData);
 
-      // Actualizar el estado con los datos del usuario obtenidos
       setUserData({
+        id: userData.id,
         username: userData.usuario,
         firstName: userData.nombre,
         lastName: userData.apellido,
@@ -68,9 +66,32 @@ function User() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleEditClick = () => {
+    setIsEditing(true); 
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userData);
+    try {
+      const response = await fetch("http://localhost:3002/api/user/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+        
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error("No se pudo modificar el perfil del usuario");
+      }
+      console.log(userData);
+      console.log("Perfil del usuario actualizado exitosamente");
+      setIsEditing(false); 
+    } catch (error) {
+      console.error("Error al modificar el perfil del usuario:", error);
+    }
   };
 
   return (
@@ -79,14 +100,13 @@ function User() {
       <div className="bg-gradient-to-b from-violet-900 to-pink-900 p-3 min-h-screen flex items-center">
         <div className="container px-8 pt-6 pb-8 mx-auto flex flex-col bg-black bg-opacity-45 border border-white-500 border-4 rounded md:w-2/3">
           <h1 className="text-2xl text-3xl font-extrabold text-white mb-4">
-            {t('edit_profile')}
+            {isEditing ? t('edit_profile') : t('view_profile')}
           </h1>
           <div className="flex flex-col md:flex-row md:items-center">
-            {/* Imagen de perfil en la izquierda para escritorio y centrada para tablet y móvil */}
             <div className="mb-4 md:mr-8 md:w-1/3 flex justify-center md:justify-start flex-col items-center">
               <label
                 htmlFor="profileImage"
-                className="block text-white mb-1 "
+                className="block text-white mb-1"
               >
                 {t('profile_image')}
               </label>
@@ -103,10 +123,10 @@ function User() {
                   id="profileImage"
                   name="profileImage"
                   onChange={handleChange}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer "
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   accept="image/*"
                 />
-                <span className="block w-full py-2 px-3 rounded bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-center cursor-pointer ">
+                <span className="block w-full py-2 px-3 rounded bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-center cursor-pointer">
                   {fileName || t('select_image')}
                 </span>
               </div>
@@ -115,9 +135,9 @@ function User() {
               <div className="mb-4">
                 <label
                   htmlFor="username"
-                  className="block text-gray-700 font-bold mb-2"
+                  className="block text-white font-bold mb-2"
                 >
-                  Nombre de Usuario
+                  {t('username')}
                 </label>
                 <input
                   type="text"
@@ -125,14 +145,14 @@ function User() {
                   name="username"
                   value={userData.username}
                   onChange={handleChange}
-                  className="border rounded w-full py-2 px-3"
-                  disabled
+                  className={`border rounded w-full py-2 px-3 bg-black text-white ${isEditing ? '' : 'disabled'}`}
+                  disabled={!isEditing}
                 />
               </div>
               <div className="mb-4">
                 <label
                   htmlFor="firstName"
-                  className="block text-white mb-2 "
+                  className="block text-white mb-2"
                 >
                   {t('name')}
                 </label>
@@ -142,8 +162,8 @@ function User() {
                   name="firstName"
                   value={userData.firstName}
                   onChange={handleChange}
-                  className="border rounded w-full py-2 px-3"
-                  disabled
+                  className={`border rounded w-full py-2 px-3 bg-black text-white ${isEditing ? '' : 'disabled'}`}
+                  disabled={!isEditing}
                 />
               </div>
               <div className="mb-4">
@@ -159,8 +179,8 @@ function User() {
                   name="lastName"
                   value={userData.lastName}
                   onChange={handleChange}
-                  className="border rounded w-full py-2 px-3"
-                  disabled
+                  className={`border rounded w-full py-2 px-3 bg-black text-white ${isEditing ? '' : 'disabled'}`}
+                  disabled={!isEditing}
                 />
               </div>
               <div className="mb-4">
@@ -176,47 +196,16 @@ function User() {
                   name="email"
                   value={userData.email}
                   onChange={handleChange}
-                  className="border rounded w-full py-2 px-3"
-                  disabled
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="password"
-                  className="block text-white mb-2"
-                >
-                  {t('password')}
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={userData.password}
-                  onChange={handleChange}
-                  className="border rounded w-full py-2 px-3"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="confirmPassword"
-                  className="block text-white mb-2"
-                >
-                  {t('confirm_passw')}
-                </label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  value={userData.confirmPassword}
-                  onChange={handleChange}
-                  className="border rounded w-full py-2 px-3"
+                  className={`border rounded w-full py-2 px-3 bg-black text-white ${isEditing ? '' : 'disabled'}`}
+                  disabled={!isEditing}
                 />
               </div>
               <button
-                type="submit"
+                type="button"
+                onClick={isEditing ? handleSubmit : handleEditClick}
                 className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
               >
-                {t('save_changes')}
+                {isEditing ? t('save_changes') : t('edit_profile')}
               </button>
             </form>
           </div>

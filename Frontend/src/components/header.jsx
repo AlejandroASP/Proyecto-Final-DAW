@@ -6,7 +6,7 @@ import spain from '../assets/españa.png';
 import french from '../assets/francia.png';
 import united_kingdom from '../assets/reino_unido.png';
 import '../App.css';
-import { FlagIcon } from '@heroicons/react/outline';
+
 
 const Header = () => {
   const { t, i18n } = useTranslation();

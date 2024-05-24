@@ -40,8 +40,8 @@ router.post("/login", async (req, res) => {
 
 // Middleware para verificar el token JWT
 const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
 
   if (token == null) {
     return res.sendStatus(401); // Si no hay token, se deniega el acceso
@@ -76,38 +76,38 @@ router.get("/profile", authenticateToken, async (req, res) => {
 
 // Actualizar información del usuario
 router.put("/profile", async (req, res) => {
-  const { username, firstName, lastName, email } = req.body;
+  const { id, username, firstName, lastName, email } = req.body;
+  try {
+    // Verificar si algún campo está vacío o indefinido
+    if (!id || !username || !firstName || !lastName || !email) {
+      logger.error("Datos del usuario incompletos");
+      return res.status(400).json({ error: "Datos del usuario incompletos" });
+    }
 
-  if (
-    username === undefined ||
-    firstName === undefined ||
-    lastName === undefined ||
-    email === undefined
-  ) {
-    logger.error("Datos del usuario indefinidos");
-    res.json({ error: "Datos del usuario incorrectos" });
-    return;
+    // Buscar al usuario por su nombre de usuario
+    const user = await User.findOne({ where: { id: id } });
+
+    // Si el usuario no se encuentra, devolver un error
+    if (!user) {
+      logger.error("Usuario no encontrado");
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    // Actualizar los campos del usuario
+    user.usuario = username;
+    user.nombre = firstName;
+    user.apellido = lastName;
+    user.email = email;
+
+    // Guardar los cambios en la base de datos
+    await user.save();
+
+    logger.info(`Perfil del usuario ${username} actualizado`);
+    return res.status(200).json({ message: "Perfil actualizado" });
+  } catch (error) {
+    logger.error("Error al actualizar el perfil del usuario:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
   }
-
-  const user = await User.findOne({
-    where: {
-      usuario: username,
-    },
-  });
-
-  if (!user) {
-    logger.error("Usuario no encontrado");
-    res.json({ error: "Usuario no encontrado" });
-    return;
-  }
-
-  user.nombre = firstName;
-  user.apellido = lastName;
-  user.email = email;
-  await user.save();
-
-  logger.info(`Usuario ${username} actualizado`);
-  res.json({ message: "Perfil actualizado" });
 });
 
 // Cambiar contraseña
