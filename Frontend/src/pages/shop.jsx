@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 
 function Tienda() {
+  const { t } = useTranslation();
   const useScreenSize = () => {
     const [width, setWidth] = useState(window.innerWidth);
 
@@ -40,10 +43,21 @@ function Tienda() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Genres fetched:", data);
-        setGenres(data);
+
+        // Mapear los géneros para traducir sus nombres
+        const translatedGenres = data.map(genre => {
+          const genreKey = genre.nombre.toLowerCase().replace(/[^a-z0-9]+/g, '');
+          return {
+            ...genre,
+            nombre: t(`genres.${genreKey}`, {
+              defaultValue: genre.nombre // Valor por defecto si no se encuentra la traducción
+            })
+          };
+        });
+        setGenres(translatedGenres);
       })
       .catch((error) => console.error("Error fetching genres:", error));
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     const genreQuery = selectedGenre ? `?genre_id=${selectedGenre}` : "";
@@ -107,7 +121,7 @@ function Tienda() {
         <div className="relative w-full max-w-md px-4 mt-8 mb-6">
           <label htmlFor="search" className="absolute top-1 left-5">
             <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#666666">
-              <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/>
+              <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
             </svg>
           </label>
           <input
@@ -128,7 +142,7 @@ function Tienda() {
                 : "bg-gray-300 text-black"
                 }`}
             >
-              Todos los géneros
+              {t('all_genres')}
             </button>
             {genres.map((genre) => (
               <button
@@ -178,11 +192,11 @@ function Tienda() {
             className="mr-2 px-4 py-1 bg-indigo-900 bg-opacity-70 rounded"
           >
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
-              <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
+              <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
             </svg>
           </button>
           <span className="mx-2 text-white">
-            Página {paginaActual} de {numeroTotalPaginas}
+            {t('page')} {paginaActual} {t('of')} {numeroTotalPaginas}
           </span>
           <button
             onClick={irPaginaSiguiente}
@@ -190,7 +204,7 @@ function Tienda() {
             className="ml-2 px-4 py-1 bg-indigo-900 bg-opacity-70 rounded"
           >
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
-              <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/>
+              <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z" />
             </svg>
           </button>
         </div>
