@@ -166,6 +166,7 @@ router.get("/related/:gameId", async (req, res) => {
         const relatedGames = await Game.findAll({
             where: { genre_id: genreId, id: { [Op.ne]: gameId } },
             attributes: ['id', 'nombre', 'img', 'precio'],
+            limit: 4
         });
 
         res.json(relatedGames);
