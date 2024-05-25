@@ -26,10 +26,6 @@ const CartGame = sequelize.define("cart_game", {
       onDelete: 'RESTRICT'
     }
   },
-  cantidad: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
 }, {
   freezeTableName: true,
   timestamps: false,

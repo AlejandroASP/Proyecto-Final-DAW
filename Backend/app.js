@@ -3,7 +3,7 @@ import cors from "cors";
 import winston from "winston";
 import "./server/db.js";
 import "./models/associations.js";
-// import cartRouter from './server/routes/cart.js'; // Asumiendo que tienes un archivo cart.js en la carpeta routes
+import cartRouter from './server/routes/cart.js';
 import gameRouter from "./server/routes/game.js";
 import genreRouter from "./server/routes/genre.js";
 import userRouter from "./server/routes/user.js";
@@ -32,7 +32,7 @@ app.use(express.json({ limit: "50mb" }));
 
 import "./models/associations.js";
 
-// app.use('/api/cart', cartRouter);
+app.use('/api/cart', cartRouter);
 app.use("/api/game", gameRouter);
 app.use("/api/genre", genreRouter);
 app.use("/api/user", userRouter);

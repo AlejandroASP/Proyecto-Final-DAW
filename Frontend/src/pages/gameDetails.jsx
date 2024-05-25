@@ -109,6 +109,38 @@ function GameDetails() {
       </span>
     );
   }
+  const handleAddToCart = async () => {
+    const token = sessionStorage.getItem("token");
+    // No necesitas obtener userId aquí
+
+    if (!token) {
+      window.location.href = "/login";
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:3002/api/cart/add-to-cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Agrega "Bearer " antes del token
+        },
+        body: JSON.stringify({ gameId }), // No necesitas enviar token y username aquí
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add game to cart");
+      }
+
+      const data = await response.json();
+      console.log("Game added to cart:", data);
+      alert("Game added to cart");
+    } catch (error) {
+      console.error("Error adding game to cart:", error);
+      alert("Failed to add game to cart");
+    }
+  };
+
 
   if (!game) {
     return (
@@ -148,13 +180,14 @@ function GameDetails() {
                   : "bg-blue-800 hover:bg-blue-700 text-white"
                   }`}
                 onClick={() => {
+
                   if (!sessionStorage.getItem("token")) {
                     window.location.href = "/login";
                   } else {
                     // Si hay un token, puedes ejecutar la lógica para añadir al carrito aquí
                     // Simplemente coloca la lógica de añadir al carrito dentro de este else
                     // Por ejemplo:
-                    // handleAddToCart();
+                    handleAddToCart();
                   }
                 }}
               >

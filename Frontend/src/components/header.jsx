@@ -7,15 +7,20 @@ import french from '../assets/francia.png';
 import united_kingdom from '../assets/reino_unido.png';
 import '../App.css';
 
-
 const Header = () => {
   const { t, i18n } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [username, setUsername] = useState(null);
+  const [cart, setCart] = useState([]);
+  const [cartOpen, setCartOpen] = useState(false);
   const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const toggleCart = () => {
+    setCartOpen(!cartOpen);
   };
 
   const handleLogout = () => {
@@ -35,7 +40,22 @@ const Header = () => {
       const storedUsername = sessionStorage.getItem('username');
       setUsername(storedUsername);
     }
+
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(storedCart);
   }, []);
+
+  const handleAddToCart = (game) => {
+    const updatedCart = [...cart, game];
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const handleRemoveFromCart = (gameId) => {
+    const updatedCart = cart.filter((game) => game.id !== gameId);
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
 
   return (
     <header className="bg-gray-900">
@@ -52,7 +72,12 @@ const Header = () => {
             {username && (
               <>
                 <li>
-                  <Link to={'/cart'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('cart')}</Link>
+                  <button onClick={toggleCart} className="relative text-gray-300 hover:text-white transition duration-300 text-2xl">
+                    {t('cart')}
+                    {cart.length > 0 && (
+                      <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 text-xs">{cart.length}</span>
+                    )}
+                  </button>
                 </li>
                 <li>
                   <Link to={'/user'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('profile')}</Link>
@@ -62,7 +87,6 @@ const Header = () => {
           </ul>
         </nav>
         <div className="flex items-center justify-between md:justify-end space-x-4 md:ml-auto">
-          {/* Menú de navegación */}
           <nav className="hidden md:flex">
             <ul className="flex items-center space-x-6">
               {!username ? (
@@ -81,7 +105,6 @@ const Header = () => {
               )}
             </ul>
           </nav>
-          {/* Botones de cambio de idioma */}
           <div className="flex items-center space-x-4">
             <button onClick={() => changeLanguage('es')} className="text-gray-300">
               <img src={spain} alt="Spanish Flag" className="h-6 w-auto" />
@@ -113,7 +136,12 @@ const Header = () => {
             </li>
             {username && (
               <li>
-                <Link to={'/cart'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>{t('cart')}</Link>
+                <button onClick={toggleCart} className="text-gray-300 hover:text-white transition duration-300 text-2xl">
+                  {t('cart')}
+                  {cart.length > 0 && (
+                    <span className="bg-red-500 text-white rounded-full px-2 text-xs">{cart.length}</span>
+                  )}
+                </button>
               </li>
             )}
             {!username ? (
@@ -137,6 +165,28 @@ const Header = () => {
             )}
           </ul>
         </nav>
+      )}
+      {cartOpen && (
+        <div className="absolute right-0 top-16 bg-white border border-gray-300 rounded-lg shadow-lg w-64 p-4">
+          <h2 className="text-xl font-bold mb-2">{t('cart')}</h2>
+          {cart.length === 0 ? (
+            <p>{t('no_items_in_cart')}</p>
+          ) : (
+            <ul>
+              {cart.map((game) => (
+                <li key={game.id} className="flex justify-between items-center mb-2">
+                  <span>{game.nombre}</span>
+                  <button onClick={() => handleRemoveFromCart(game.id)} className="text-red-500 hover:text-red-700">
+                    {t('remove')}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          <Link to={'/cart'} className="block mt-2 text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            {t('go_to_cart')}
+          </Link>
+        </div>
       )}
       {username && (
         <h1 className="text-gray-300 text-2xl text-center">{t('welcome', { username })}</h1>
