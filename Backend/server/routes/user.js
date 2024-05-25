@@ -145,28 +145,39 @@ router.put("/change-password", async (req, res) => {
 });
 
 // Registrar usuario
+// Registrar usuario
 router.post("/register", async (req, res) => {
   const { username, firstName, lastName, email, password, rol } = req.body;
 
-  // Verificar si el usuario ya existe
-  const existingUser = await User.findOne({ where: { usuario: username } });
-  if (existingUser) {
-    res.json({ error: "El usuario ya existe" });
-    return;
+  try {
+    // Verificar si el usuario ya existe
+    const existingUser = await User.findOne({ where: { usuario: username } });
+    if (existingUser) {
+      return res.status(400).json({ message: "❌ Ya existe un registro con ese Nombre de Usuario, por favor, introduzca otro" });
+    }
+    // Verificar si el correo del usuario ya existe
+    const existingEmail = await User.findOne({ where: { email: email } });
+    if (existingEmail) {
+      return res.status(400).json({ message: "❌ Ya existe un registro con ese Correo Electrónico, por favor, introduzca otro" });
+    }
+
+    // Crear un nuevo usuario
+    const newUser = await User.create({
+      usuario: username,
+      nombre: firstName,
+      apellido: lastName,
+      email: email,
+      contraseña: sha1(password),
+      rol: rol,
+    });
+
+    logger.info(`Nuevo usuario registrado: ${username}`);
+    res.json({ success: true });
+  } catch (error) {
+    logger.error("Error al registrar el usuario:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
   }
-
-  // Crear un nuevo usuario
-  const newUser = await User.create({
-    usuario: username,
-    nombre: firstName,
-    apellido: lastName,
-    email: email,
-    contraseña: sha1(password),
-    rol: rol,
-  });
-
-  logger.info(`Nuevo usuario registrado: ${username}`);
-  res.json({ success: true });
 });
 
 export default router;
+
