@@ -1,6 +1,7 @@
 {
     "welcome": "Welcome back to the Vortex, {{username}}!",
     "store": "Store",
+    "aboutus": "About us",
     "cart": "Cart",
     "profile": "Profile",
     "login": "Login",
