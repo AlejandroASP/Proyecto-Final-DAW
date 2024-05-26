@@ -1,0 +1,35 @@
+version: '2.27.0'
+
+services:
+  front:
+    build:
+      context: ../Frontend  # Ajusta la ruta al contexto correcto
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - back
+
+  back:
+    build:
+      context: ../Backend  # Ajusta la ruta al contexto correcto
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=db
+      - DB_USER=Vortex_Admin
+      - DB_PASSWORD=Vortex_7788
+      - DB_NAME=vortexdb
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=vortexdb
+      - POSTGRES_USER=Vortex_Admin
+      - POSTGRES_PASSWORD=Vortex_7788
