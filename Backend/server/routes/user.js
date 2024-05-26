@@ -123,6 +123,34 @@ router.put("/profile", async (req, res) => {
   }
 });
 
+// Actualizar avatar del usuario
+router.put("/profile/avatar", authenticateToken, async (req, res) => {
+  const { id } = req.user; // Obtener el ID del usuario autenticado
+  const { imgNumber } = req.body; // Obtener el número de imagen del cuerpo de la solicitud
+
+  console.log("ID del usuario:", id); // Log para verificar ID del usuario
+  console.log("Número de imagen recibido:", imgNumber); // Log para verificar número de imagen
+
+  try {
+    // Buscar y actualizar el usuario con el nuevo número de imagen
+    const user = await User.findOne({ where: { id: id } });
+
+    if (!user) {
+      logger.error("Usuario no encontrado");
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+    user.img = imgNumber;
+    await user.save();
+
+    logger.info(`Avatar del usuario ${user.usuario} actualizado`);
+    res.status(200).json({ message: "Avatar actualizado exitosamente" });
+  } catch (error) {
+    logger.error("Error al actualizar el avatar del usuario:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
+
 
 // Cambiar contraseña
 router.put("/change-password", async (req, res) => {
@@ -182,6 +210,7 @@ router.post("/register", async (req, res) => {
       email: email,
       contraseña: sha1(password),
       rol: rol,
+      img: "1"
     });
 
     logger.info(`Nuevo usuario registrado: ${username}`);

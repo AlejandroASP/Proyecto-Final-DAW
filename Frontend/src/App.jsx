@@ -8,6 +8,7 @@ import GameDetails from './pages/gameDetails';
 import Cart from './pages/cart';
 import User from './pages/user';
 import Aboutus from './pages/aboutus';
+import SelectAvatar from "./pages/selectAvatar";
 
 export function App() {
   return (
@@ -22,6 +23,7 @@ export function App() {
           <Route path='/details/:gameId' element={<GameDetails />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/user' element={<User />} />
+          <Route path='/selectAvatar' element={<SelectAvatar/>}/>
         </Routes>
       </BrowserRouter>
     </div>
