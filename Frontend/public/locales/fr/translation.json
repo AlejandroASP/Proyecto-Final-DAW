@@ -63,6 +63,11 @@
         "survival": "Survie"
     },
     "price": "Prix:",
-    "view_profile": "Voir le profil"
-   
+    "view_profile": "Voir le profil",
+    "search": "Rechercher un jeu",
+    "about": "Sur Nous",
+    "info_1": "Bienvenue dans notre projet, une plateforme créée par les joueurs pour les joueurs. Notre voyage a commencé avec trois personnes passionnées qui ont vu le besoin dans la communauté des joueurs d’avoir un endroit où les amateurs pourraient accéder à des jeux à des prix abordables compétitifs.",
+    "info_2": "En tant que joueurs passionnés, nous comprenons les défis et les coûts associés à poursuivre notre passion. C’est pourquoi nous avons entrepris cette mission : créer un espace où tout amateur de jeux vidéo peut trouver des options abordables sans compromettre la qualité ou la sélection.",
+    "info_3": "Notre équipe se consacre à améliorer constamment la plate-forme, en veillant à ce que nos utilisateurs aient la meilleure expérience possible. Que vous cherchiez les dernières sorties ou les classiques favoris, notre objectif est de rendre les jeux vidéo accessibles à tous.",
+    "info_4": "Merci de faire partie de notre communauté. Ensemble, nous pouvons rendre les jeux plus inclusifs et plus agréables pour tout le monde."
 }

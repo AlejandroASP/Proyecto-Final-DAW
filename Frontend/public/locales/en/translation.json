@@ -64,5 +64,11 @@
         "survival": "Survival"
     },
     "price": "Price:",
-    "view_profile": "View profile"
+    "view_profile": "View profile",
+    "search": "Search game",
+    "about": "About Us",
+    "info_1":" Welcome to our project, a platform created by players for players. Our journey started with three passionate people who saw the need in the player community to have a place where enthusiasts could access games at competitive prices.",
+    "info_2":"As avid players, we understand the challenges and expenses associated with pursuing our passion. That’s why we undertook this mission: to create a space where any video game lover can find affordable options without compromising quality or selection.",
+    "info_3":"Our team is dedicated to constantly improving the platform, ensuring that our users have the best possible experience. Whether you’re looking for the latest releases or favorite classics, our goal is to make video games accessible to everyone.",
+    "info_4":"Thank you for being part of our community. Together, we can make video games more inclusive and enjoyable for everyone."
 }

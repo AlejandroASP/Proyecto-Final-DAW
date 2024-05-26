@@ -127,7 +127,7 @@ function Tienda() {
           <input
             id="search"
             type="text"
-            placeholder="Buscar juegos"
+            placeholder={t('search')}
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
             className="w-full border border-gray-300 rounded-md py-2 text-center"
