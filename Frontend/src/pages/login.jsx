@@ -50,7 +50,7 @@ function Login() {
     <>
       <Header />
       <div className="bg-gradient-to-b from-violet-900 to-pink-900">
-        <div className="min-h-screen flex justify-center items-center">
+        <div className="flex justify-center items-center">
           <div style={{display: !recoverPassword ? 'block' : 'none'}} className="bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded px-8 pt-6 pb-6 mb-4 w-full sm:max-w-md">
             <h2 className="text-center text-3xl font-extrabold text-white">
               {t("login")}
@@ -126,9 +126,11 @@ function Login() {
               </p>
             </div>
           </div>
-          <div style={{display: recoverPassword ? 'block' : 'none'}} className="absolute  top-80 flex justify-center align-center">
-            <button className="text-white absolute top-80 right-2 pt-6 pr-1" onClick={() => setRecoverPassword(!recoverPassword)}>X</button>
-            <RecoverPassword/>
+          <div style={{display: recoverPassword ? 'block' : 'none'}} className=" flex justify-center align-center">
+            <div className="flex flex-col items-end">
+              <button className="text-white absolute pr-2 pt-1" onClick={() => setRecoverPassword(!recoverPassword)}>X</button>
+              <RecoverPassword/>
+            </div>
           </div>
         </div>
       </div>

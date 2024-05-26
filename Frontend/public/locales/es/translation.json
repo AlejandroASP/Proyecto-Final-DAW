@@ -1,6 +1,7 @@
 {
     "welcome": "¡Bienvenido de nuevo al Vórtice, {{username}}!",
     "store": "Tienda",
+    "aboutus": "Sobre nosotros",
     "cart": "Carrito",
     "profile": "Perfil",
     "login": "Iniciar Sesión",

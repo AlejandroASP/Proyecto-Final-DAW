@@ -182,7 +182,7 @@ function GameDetails() {
             </div>
           </div>
         </div>
-        <div className="max-w-8xl w-full mt-8 bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded-lg overflow-hidden">
+        <div className="max-w-8xl  w-full mt-8 bg-black bg-opacity-45 border border-white-500 border-4 shadow-md rounded-lg overflow-hidden">
           <div className="p-4">
             <h3 className="text-xl text-white font-bold mb-4 flex justify-center">
               {t('similar_games')}
@@ -211,8 +211,7 @@ function GameDetails() {
             </div>
           </div>
         </div>
-
-      </div >
+      </div>
       <Footer />
     </>
   );

@@ -39,15 +39,26 @@ const Header = () => {
 
   return (
     <header className="bg-gray-900">
-      <div className="container mx-auto flex items-center justify-between py-8 px-8">
-        <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-8 w-auto mr-4 rotate-reverse" />
-          <Link to={'/'} className="text-gray-300 hover:text-white transition duration-300 text-3xl font-semibold">Vortex</Link>
-        </div>
+      <div className="container mx-auto flex justify-between py-8 px-8">
+        {!username && (
+          <div className="flex lg:pr-40">
+            <img src={logo} alt="Logo" className="h-8 w-auto mr-4 rotate-reverse" />
+            <Link to={'/'} className="text-gray-300 hover:text-white transition duration-300 text-3xl font-semibold">Vortex</Link>
+          </div>
+        )}
+        {username && (
+          <div className="flex">
+            <img src={logo} alt="Logo" className="h-8 w-auto mr-4 rotate-reverse" />
+            <Link to={'/'} className="text-gray-300 hover:text-white transition duration-300 text-3xl font-semibold">Vortex</Link>
+          </div>
+        )}
         <nav className="hidden md:flex flex-grow justify-center">
-          <ul className="flex items-center space-x-6">
+          <ul className="flex space-x-6">
             <li>
               <Link to={'/tienda'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('store')}</Link>
+            </li>
+            <li>
+              <Link to={'/nosotros'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('aboutus')}</Link>
             </li>
             {username && (
               <>
@@ -61,7 +72,7 @@ const Header = () => {
             )}
           </ul>
         </nav>
-        <div className="flex items-center justify-between md:justify-end space-x-4 md:ml-auto">
+        <div className="flex-col items-center justify-between md:justify-end space-x-4 md:ml-auto">
           {/* Menú de navegación */}
           <nav className="hidden md:flex">
             <ul className="flex items-center space-x-6">
@@ -82,7 +93,7 @@ const Header = () => {
             </ul>
           </nav>
           {/* Botones de cambio de idioma */}
-          <div className="flex items-center space-x-4">
+          <div className="flex justify-end md:mt-2 space-x-4">
             <button onClick={() => changeLanguage('es')} className="text-gray-300">
               <img src={spain} alt="Spanish Flag" className="h-6 w-auto" />
               <span className="sr-only">Español</span>
@@ -110,6 +121,9 @@ const Header = () => {
           <ul className="flex flex-col items-center space-y-4">
             <li>
               <Link to={'/tienda'} className="text-gray-300 hover:text-white transition duration-300 text-2xl" onClick={toggleMenu}>{t('store')}</Link>
+            </li>
+            <li>
+              <Link to={'/nosotros'} className="text-gray-300 hover:text-white transition duration-300 text-2xl">{t('aboutus')}</Link>
             </li>
             {username && (
               <li>
