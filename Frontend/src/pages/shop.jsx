@@ -117,7 +117,7 @@ function Tienda() {
   return (
     <>
       <Header />
-      <div className="bg-gradient-to-b from-violet-900 to-pink-900 min-h-screen flex flex-col items-center">
+      <div className="bg-gradient-to-b from-violet-900 to-pink-900 flex flex-col items-center">
         <div className="relative w-full max-w-md px-4 mt-8 mb-6">
           <label htmlFor="search" className="absolute top-1 left-5">
             <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#666666">
@@ -127,7 +127,7 @@ function Tienda() {
           <input
             id="search"
             type="text"
-            placeholder="Buscar juegos"
+            placeholder={t('search')}
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
             className="w-full border border-gray-300 rounded-md py-2 text-center"

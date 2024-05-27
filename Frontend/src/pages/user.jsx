@@ -157,10 +157,9 @@ function User() {
   return (
     <>
       <Header />
-
-      <div className="bg-gradient-to-b from-violet-900 to-pink-900 p-3 min-h-screen flex items-center">
-        <div className="container px-8 pt-6 pb-8 mx-auto flex flex-col bg-black bg-opacity-45 border-white-500 border-4 rounded md:w-2/3">
-          <h1 className="text-3xl font-extrabold text-white mb-4">
+      <div className="bg-gradient-to-b from-violet-900 to-pink-900 p-3 flex items-center">
+        <div className="container px-8 pt-6 pb-8 mx-auto flex flex-col bg-black bg-opacity-45  border-white-500 border-4 rounded md:w-2/3">
+          <h1 className=" text-3xl font-extrabold text-white mb-4">
             {isEditing ? t("edit_profile") : t("view_profile")}
           </h1>
           <div className="flex flex-col md:flex-row md:items-center">

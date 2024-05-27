@@ -121,7 +121,7 @@ function GameDetails() {
   return (
     <>
       <Header />
-      <div className="bg-gradient-to-b from-violet-900 to-pink-900 min-h-screen flex flex-col items-center pt-8">
+      <div className="bg-gradient-to-b from-violet-900 to-pink-900 flex flex-col items-center pt-8">
         <div className="max-w-4xl w-full bg-black bg-opacity-45 mb-8 border border-white-500 border-4 shadow-md rounded-lg overflow-hidden">
           <div className="p-4">
             <Link to="/tienda" className="text-blue-500 hover:text-yellow-200">
