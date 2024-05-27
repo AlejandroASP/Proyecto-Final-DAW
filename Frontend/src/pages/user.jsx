@@ -2,6 +2,24 @@ import { useState, useEffect } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
+import avatar1 from "../assets/avatar/1.png";
+import avatar2 from "../assets/avatar/2.png";
+import avatar3 from "../assets/avatar/3.png";
+import avatar4 from "../assets/avatar/4.png";
+import avatar5 from "../assets/avatar/5.png";
+import avatar6 from "../assets/avatar/6.png";
+import avatar7 from "../assets/avatar/7.png";
+import avatar8 from "../assets/avatar/8.png";
+import avatar9 from "../assets/avatar/9.png";
+import avatar10 from "../assets/avatar/10.png";
+import avatar11 from "../assets/avatar/11.png";
+import avatar12 from "../assets/avatar/12.png";
+import avatar13 from "../assets/avatar/13.png";
+import avatar14 from "../assets/avatar/14.png";
+
+const avatarImages = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8, avatar9, avatar10, avatar11, avatar12, avatar13, avatar14];
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/;
@@ -15,12 +33,13 @@ function User() {
     firstName: "",
     lastName: "",
     email: "",
-    profileImage: null,
+    profileImage: "",
   });
   const [fileName, setFileName] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
 
   useEffect(() => {
     fetchUserProfile();
@@ -43,6 +62,9 @@ function User() {
 
       const userData = await response.json();
       console.log("Información del usuario:", userData);
+
+      const avatarPath = userData.img ? avatarImages[userData.img - 1] : avatar1; // Ajuste para seleccionar la imagen correcta
+      setAvatarUrl(avatarPath);
 
       setUserData({
         id: userData.id,
@@ -135,34 +157,31 @@ function User() {
   return (
     <>
       <Header />
-
       <div className="bg-gradient-to-b from-violet-900 to-pink-900 p-3 flex items-center">
         <div className="container px-8 pt-6 pb-8 mx-auto flex flex-col bg-black bg-opacity-45  border-white-500 border-4 rounded md:w-2/3">
           <h1 className=" text-3xl font-extrabold text-white mb-4">
             {isEditing ? t("edit_profile") : t("view_profile")}
-
           </h1>
           <div className="flex flex-col md:flex-row md:items-center">
             <div className="mb-4 md:mr-8 md:w-1/3 flex justify-center md:justify-start flex-col items-center">
-              <label htmlFor="profileImage" className="block text-white mb-1">
-                {t("profile_image")}
-              </label>
               <div className="max-w-xs w-full relative">
-                {userData.profileImage && (
+                {avatarUrl && (
                   <img
-                    src={userData.profileImage}
+                    src={avatarUrl}
                     alt="Profile"
-                    className="my-4 w-full md:w-auto rounded-full"
+                    className="my-4 md:w-auto rounded-full"
                   />
                 )}
-                <input
-                  type="file"
-                  id="profileImage"
-                  name="profileImage"
-                  onChange={handleChange}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  accept="image/*"
-                />
+                <Link to="/selectAvatar">
+                  <input
+                    type="text"
+                    id="profileImage"
+                    name="profileImage"
+                    onChange={handleChange}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    accept="image/*"
+                  />
+                </Link>
                 <span className="block w-full py-2 px-3 rounded bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-center cursor-pointer">
                   {fileName || t("select_image")}
                 </span>
